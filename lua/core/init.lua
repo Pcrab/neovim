@@ -39,3 +39,5 @@ vim.g.loaded_tutor_mode_plugin = 1
 vim.g.loaded_remote_plugins    = 1
 
 require("config")
+require("core.gui")
+require("core.keymaps")
