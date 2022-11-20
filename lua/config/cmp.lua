@@ -105,11 +105,22 @@ require("mason-lspconfig").setup({
     ensure_installed = servers,
     automatic_installation = true,
 })
+require("lspsaga").init_lsp_saga({
+    code_action_lightbulb = {
+        enable = true,
+        enable_in_insert = true,
+        cache_code_action = true,
+        sign = true,
+        update_time = 150,
+        sign_priority = 20,
+        virtual_text = true,
+    },
+})
 
 local lspconfig = require("lspconfig")
 local lsp_defaults = lspconfig.util.default_config
 
-local on_attach = function(client, bufnr)
+local on_attach = function(_, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 end
 
