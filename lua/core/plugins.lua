@@ -82,6 +82,10 @@ return require("packer").startup(function(use)
         end
     }
 
+    -- Completion
+    require("config/copilot")
+    use { "github/copilot.vim", event = "InsertEnter" }
+
     -- Specific Language
     use {
         "simrat39/rust-tools.nvim"
