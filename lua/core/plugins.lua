@@ -58,26 +58,8 @@ return require("packer").startup(function(use)
     }
 
     -- LSP
-    use {
-        "williamboman/mason.nvim",
-        "williamboman/mason-lspconfig.nvim",
-        "neovim/nvim-lspconfig",
-    }
-    use {
-        "glepnir/lspsaga.nvim",
-        branch = "main"
-    }
-    -- CMP
-    use {
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
-        "hrsh7th/cmp-cmdline",
-        "hrsh7th/nvim-cmp",
+    use {'neoclide/coc.nvim', branch = 'release'}
 
-        "L3MON4D3/LuaSnip",
-        "saadparwaiz1/cmp_luasnip",
-    }
     -- Specific Language
     use {
         "simrat39/rust-tools.nvim"
