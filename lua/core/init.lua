@@ -20,6 +20,7 @@ glob.opt.relativenumber = true
 glob.opt.shiftround     = true
 glob.opt.updatetime     = 100
 glob.opt.cursorline     = true
+glob.opt.signcolumn     = "yes"
 
 if (glob.fn.has("termguicolors") == 1) then
 	glob.opt.termguicolors = true
@@ -52,6 +53,5 @@ glob.g.loaded_netrwPlugin       = 1
 glob.g.loaded_tutor_mode_plugin = 1
 glob.g.loaded_remote_plugins    = 1
 
-require("config")
 require("core.gui")
 require("core.keymaps")

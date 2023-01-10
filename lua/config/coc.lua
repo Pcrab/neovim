@@ -4,7 +4,7 @@ local M = {}
 function M.config()
     glob.g.coc_global_extensions = {
         "coc-marketplace",
-        "coc-sumneko-lua",
+        "coc-lua",
         "coc-sh",
 
         "coc-tsserver",
@@ -39,10 +39,17 @@ function M.setup()
         { "n", "gi", "<Plug>(coc-implementation)", { silent = true } },
         { "n", "gr", "<Plug>(coc-references)", { silent = true } },
 
+        { "n", "K", ":call CocAction('doHover')<cr>", {silent = true} },
 
-        { "i", "<TAB>", "coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? '<TAB>' : coc#refresh()", opts },
-        { "i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts },
+        { "n", "[g", "<Plug>(coc-diagnostic-prev)", {silent = true} },
+        { "n", "]g", "<Plug>(coc-diagnostic-next)", {silent = true} },
+
+        { "i", "<TAB>", "coc#pum#visible() ? coc#pum#next(1) : col('.') == 1 || getline('.')[col('.') - 2] =~# '\\s' ? \"\\<TAB>\" : coc#refresh()", opts },
+        { "i", "<s-tab>", "coc#pum#visible() ? coc#pum#prev(1) : \"\\<s-tab>\"", opts },
         { "i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts },
+
+        { "x", "=", "CocHasProvider('formatRange') ? '<Plug>(coc-format-selected)' : '='", opts },
+        { "n", "=", "CocHasProvider('formatRange') ? '<Plug>(coc-format-selected)' : '='", opts },
     })
 end
 

@@ -1,0 +1,6 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": ["*"],
+  "npm.binPath": "pnpm",
+  "eslint.packageManager": "pnpm",
+  "Lua.telemetry.enable": false
+}

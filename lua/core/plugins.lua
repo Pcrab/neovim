@@ -58,7 +58,14 @@ return require("packer").startup(function(use)
     }
 
     -- LSP
-    use {'neoclide/coc.nvim', branch = 'release'}
+    require("config/coc").config()
+    use {
+        "neoclide/coc.nvim",
+        branch = "release",
+        config = function()
+            require("config/coc").setup()
+        end
+    }
 
     -- Specific Language
     use {
@@ -68,12 +75,7 @@ return require("packer").startup(function(use)
     --
     -- GUI
     --
-    use {
-        "EdenEast/nightfox.nvim",
-        config = function()
-            glob.cmd("colorscheme dayfox")
-        end
-    }
+    use { "ellisonleao/gruvbox.nvim" }
     use {
         "goolord/alpha-nvim",
         config = function()
