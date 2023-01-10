@@ -34,12 +34,20 @@ return require("packer").startup(function(use)
         end,
     }
 
+    -- Term
+    use {
+        "numToStr/Fterm.nvim",
+        config = function()
+            require("config/fterm")
+        end
+    }
+
     -- buffer
     use {
         "akinsho/bufferline.nvim",
         requires = "kyazdani42/nvim-web-devicons",
         config = function()
-            require("config/bufferline")
+            require("config/nvim-line")
         end
     }
     -- file

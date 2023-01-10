@@ -13,4 +13,4 @@ require("indent_blankline").setup {
 require("gruvbox").setup({
     transparent_mode = true,
 })
-vim.cmd([[colorscheme gruvbox]])
+glob.cmd([[colorscheme gruvbox]])

@@ -9,3 +9,5 @@ require("bufferline").setup {
 glob.map({
     { "n", "gb", ":BufferLinePick<cr>", { silent = true } }
 })
+
+return
