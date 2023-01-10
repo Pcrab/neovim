@@ -13,7 +13,6 @@ local opts = { noremap = true, silent = true }
 local nt_api = require("nvim-tree.api")
 glob.map({
     { "n", "<leader>eo", nt_api.tree.toggle, opts },
-    { "n", "<leader>ee", nt_api.tree.focus, opts }
 })
 
 -- window

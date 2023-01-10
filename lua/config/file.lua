@@ -1,3 +1,53 @@
+local glob = require("glob")
+
+local lib = require("nvim-tree.lib")
+local view = require("nvim-tree.view")
+
+local function collapse_all()
+    require("nvim-tree.actions.tree-modifiers.collapse-all").fn()
+end
+
+local function edit_or_open()
+    -- open as vsplit on current node
+    local action = "edit"
+    local node = lib.get_node_at_cursor()
+
+    -- Just copy what's done normally with vsplit
+    if node.link_to and not node.nodes then
+        require('nvim-tree.actions.node.open-file').fn(action, node.link_to)
+        view.close() -- Close the tree if file was opened
+
+    elseif node.nodes ~= nil then
+        lib.expand_or_collapse(node)
+
+    else
+        require('nvim-tree.actions.node.open-file').fn(action, node.absolute_path)
+        view.close() -- Close the tree if file was opened
+    end
+
+end
+
+local function vsplit_preview()
+    -- open as vsplit on current node
+    local action = "vsplit"
+    local node = lib.get_node_at_cursor()
+
+    -- Just copy what's done normally with vsplit
+    if node.link_to and not node.nodes then
+        require('nvim-tree.actions.node.open-file').fn(action, node.link_to)
+
+    elseif node.nodes ~= nil then
+        lib.expand_or_collapse(node)
+
+    else
+        require('nvim-tree.actions.node.open-file').fn(action, node.absolute_path)
+
+    end
+
+    -- Finally refocus on tree if it was lost
+    view.focus()
+end
+
 require("nvim-tree").setup({
     disable_netrw        = true,
     hijack_netrw         = true,
@@ -8,7 +58,9 @@ require("nvim-tree").setup({
     hijack_cursor        = false,
     update_cwd           = false,
     diagnostics          = {
-        enable = false,
+        enable = true,
+        show_on_dirs = true,
+        debounce_delay = 100,
         icons = {
             hint = "",
             info = "",
@@ -30,22 +82,28 @@ require("nvim-tree").setup({
             "^.git$"
         }
     },
-    git                  = {
-        enable = true,
-        ignore = true,
-        timeout = 500,
-    },
     view                 = {
-        width = 30,
-        hide_root_folder = false,
-        side = 'left',
         mappings = {
             custom_only = false,
-            list = {}
+            list = {
+                { key = "l", action = "edit", action_cb = edit_or_open },
+                { key = "L", action = "vsplit_preview", action_cb = vsplit_preview },
+                { key = "h", action = "close_node" },
+                { key = "H", action = "collapse_all", action_cb = collapse_all }
+            }
         },
-        number = false,
-        relativenumber = false,
-        signcolumn = "yes"
+        float = {
+            enable = true,
+            open_win_config = function()
+                local columns = glob.o.columns
+                local lines = glob.o.lines
+                local width = math.max(math.floor(columns * 0.5), 50)
+                local height = math.max(math.floor(lines * 0.5), 20)
+                local left = math.ceil((columns - width) * 0.5)
+                local top = math.ceil((lines - height) * 0.5 - 2)
+                return { relative = "editor", border = "rounded", width = width, height = height, row = top, col = left }
+            end,
+        }
     },
     trash                = {
         cmd = "trash",
