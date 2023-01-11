@@ -60,6 +60,14 @@ return require("packer").startup(function(use)
         end
     }
 
+    -- Comment
+    use {
+        "b3nj5m1n/kommentary",
+        config = function()
+            require("config/comment")
+        end
+    }
+
     --
     -- Language
     --
