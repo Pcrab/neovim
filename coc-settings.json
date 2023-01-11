@@ -2,5 +2,12 @@
   "coc.preferences.formatOnSaveFiletypes": ["*"],
   "npm.binPath": "pnpm",
   "eslint.packageManager": "pnpm",
-  "Lua.telemetry.enable": false
+  "Lua.telemetry.enable": false,
+  "languageserver": {
+    "ocaml": {
+        "command": "opam",
+        "args": ["config", "exec", "--", "ocamllsp"],
+        "filetypes": ["ocaml", "reason"]]
+    }
+  }
 }
