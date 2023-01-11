@@ -12,6 +12,7 @@ glob.opt.clipboard = "unnamedplus"
 glob.opt.hlsearch   = true
 glob.opt.showmatch  = true
 glob.opt.incsearch  = true
+glob.opt.ignorecase = true
 glob.opt.smartcase  = true
 glob.opt.timeoutlen = 400
 
