@@ -94,4 +94,22 @@ require("lazy").setup({
 			require("plugins.format")
 		end,
 	},
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		config = function()
+			require("plugins.autopair")
+		end,
+	},
+	{
+		"kevinhwang91/nvim-bqf",
+		dependencies = {
+			{
+				"junegunn/fzf",
+				build = function()
+					vim.fn["fzf#install"]()
+				end,
+			},
+		},
+	},
 })

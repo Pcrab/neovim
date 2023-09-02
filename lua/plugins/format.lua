@@ -29,6 +29,6 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 	end,
 })
 
-vim.keymap.set("n", "<leader>f", function()
+vim.keymap.set("n", "<leader>vf", function()
 	require("conform").format({})
 end)
