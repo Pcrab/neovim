@@ -32,6 +32,7 @@ require("lazy").setup({
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-context",
 			"RRethy/nvim-treesitter-textsubjects",
+			"windwp/nvim-ts-autotag",
 		},
 	},
 	{
@@ -84,6 +85,9 @@ require("lazy").setup({
 			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
 			"MunifTanjim/nui.nvim",
 		},
+		config = function()
+			require("plugins.neo-tree")
+		end,
 	},
 	{
 		"stevearc/conform.nvim",
@@ -111,5 +115,13 @@ require("lazy").setup({
 				end,
 			},
 		},
+	},
+	{
+		"nvim-neorg/neorg",
+		build = ":Neorg sync-parsers",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("plugins.neorg")
+		end,
 	},
 })
