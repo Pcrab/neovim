@@ -17,6 +17,18 @@ require("conform").setup({
 	},
 })
 
+require("lint").linters_by_ft = {
+	markdown = { "markdownlint" },
+	javascript = { "eslint" },
+	typescript = { "eslint" },
+}
+
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+	callback = function()
+		require("lint").try_lint()
+	end,
+})
+
 vim.keymap.set("n", "<leader>f", function()
 	require("conform").format({})
 end)
