@@ -21,7 +21,12 @@ require("lazy").setup({
 		end,
 	},
 	{
-		"sainnhe/everforest",
+		"folke/tokyonight.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {
+			transparent = false,
+		},
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
