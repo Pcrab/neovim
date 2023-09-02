@@ -123,10 +123,17 @@ require("lazy").setup({
 	},
 	{
 		"nvim-neorg/neorg",
-		build = ":Neorg sync-parsers",
+		-- build = ":Neorg sync-parsers",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
 			require("plugins.neorg")
+		end,
+	},
+	{
+		"stevearc/oil.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("plugins.oil")
 		end,
 	},
 })
