@@ -1,7 +1,3 @@
-local neogit = require("neogit")
-neogit.setup({})
-vim.keymap.set("n", "<leader>gs", "<cmd>Neogit<CR>")
-
 require("gitsigns").setup({
 	signs = {
 		add = { text = "│" },

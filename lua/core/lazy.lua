@@ -16,6 +16,7 @@ require("lazy").setup({
 		"ibhagwan/fzf-lua",
 		-- optional for icon support
 		dependencies = { "nvim-tree/nvim-web-devicons" },
+		event = "VeryLazy",
 		config = function()
 			require("plugins.search")
 		end,
@@ -62,6 +63,9 @@ require("lazy").setup({
 	},
 	{
 		"simrat39/symbols-outline.nvim",
+		keys = {
+			{ "<leader>vso", mode = { "n" }, "<cmd>SymbolsOutlineOpen<cr>" },
+		},
 		config = function()
 			require("plugins.outline")
 		end,
@@ -69,17 +73,25 @@ require("lazy").setup({
 	{
 		"NeogitOrg/neogit",
 		dependencies = {
-			"lewis6991/gitsigns.nvim",
-			"nvim-lua/plenary.nvim", -- required
-			"sindrets/diffview.nvim", -- optional
-			"ibhagwan/fzf-lua", -- optional
+			{ "lewis6991/gitsigns.nvim" },
+			"nvim-lua/plenary.nvim",
+			"sindrets/diffview.nvim",
+			"ibhagwan/fzf-lua",
 		},
+		opts = {},
+		keys = {
+			{ "<leader>gs", mode = { "n" }, "<cmd>Neogit<cr>" },
+		},
+	},
+	{
+		"lewis6991/gitsigns.nvim",
 		config = function()
 			require("plugins.git")
 		end,
 	},
 	{
 		"folke/flash.nvim",
+		event = "VeryLazy",
 		config = function()
 			require("plugins.flash")
 		end,
@@ -92,9 +104,16 @@ require("lazy").setup({
 			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
 			"MunifTanjim/nui.nvim",
 		},
-		config = function()
-			require("plugins.neo-tree")
-		end,
+		opts = {
+			window = {
+				position = "left",
+			},
+		},
+		keys = {
+			{ "<leader>tt", mode = { "n" }, "<cmd>Neotree toggle<cr>" },
+			{ "<leader>tg", mode = { "n" }, "<cmd>Neotree source=git_status reveal=true toggle<cr>" },
+			{ "<leader>tr", mode = { "n" }, "<cmd>Neotree reveal=true toggle<cr>" },
+		},
 	},
 	{
 		"stevearc/conform.nvim",
@@ -125,8 +144,8 @@ require("lazy").setup({
 	},
 	{
 		"nvim-neorg/neorg",
-		-- build = ":Neorg sync-parsers",
 		dependencies = { "nvim-lua/plenary.nvim" },
+		ft = { "norg" },
 		config = function()
 			require("plugins.neorg")
 		end,
@@ -134,6 +153,7 @@ require("lazy").setup({
 	{
 		"stevearc/oil.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
+		event = "VeryLazy",
 		config = function()
 			require("plugins.oil")
 		end,
@@ -141,9 +161,12 @@ require("lazy").setup({
 	{
 		"akinsho/toggleterm.nvim",
 		version = "*",
-		config = function()
-			require("plugins.term")
-		end,
+		opts = {
+			direction = "float",
+		},
+		keys = {
+			{ "<C-\\>", mode = { "n", "t", "i" }, "<cmd>ToggleTerm<cr>" },
+		},
 	},
 	{
 		"numToStr/Comment.nvim",
@@ -162,6 +185,21 @@ require("lazy").setup({
 		end,
 		config = function()
 			require("plugins.undo")
+		end,
+	},
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		config = function()
+			require("plugins.indent")
+		end,
+	},
+	{
+		"nvim-lualine/lualine.nvim",
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+		},
+		config = function()
+			require("plugins.lualine")
 		end,
 	},
 })
