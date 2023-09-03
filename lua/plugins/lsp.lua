@@ -1,7 +1,7 @@
 local lsp = require("lsp-zero").preset({})
 
 require("mason-lspconfig").setup({
-	ensure_installed = { "lua_ls", "tsserver", "eslint", "unocss" },
+	ensure_installed = { "lua_ls", "tsserver", "eslint", "unocss", "kotlin_language_server" },
 })
 
 lsp.on_attach(function(_, bufnr)

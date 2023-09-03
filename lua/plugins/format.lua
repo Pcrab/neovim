@@ -9,6 +9,9 @@ require("conform").setup({
 			-- Run formatters one after another instead of stopping at the first success
 			run_all_formatters = true,
 		},
+		kotlin = {
+			formatters = { "ktlint" },
+		},
 	},
 	format_on_save = {
 		-- These options will be passed to conform.format()
@@ -21,6 +24,7 @@ require("lint").linters_by_ft = {
 	markdown = { "markdownlint" },
 	javascript = { "eslint" },
 	typescript = { "eslint" },
+	kotlin = { "ktlint" },
 }
 
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
