@@ -9,6 +9,9 @@ require("conform").setup({
 			-- Run formatters one after another instead of stopping at the first success
 			run_all_formatters = true,
 		},
+		ocaml = {
+			formatters = { "ocamlformat" },
+		},
 	},
 	format_on_save = {
 		-- These options will be passed to conform.format()
