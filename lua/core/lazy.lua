@@ -22,8 +22,7 @@ require("lazy").setup({
 		end,
 	},
 	{
-		"rose-pine/neovim",
-		name = "rose-pine",
+		"sainnhe/everforest",
 		lazy = false,
 		priority = 1000,
 	},
