@@ -134,4 +134,17 @@ require("lazy").setup({
 			require("plugins.oil")
 		end,
 	},
+	{
+		"akinsho/toggleterm.nvim",
+		version = "*",
+		config = function()
+			require("plugins.term")
+		end,
+	},
+	{
+		"numToStr/Comment.nvim",
+		config = function()
+			require("plugins.comment")
+		end,
+	},
 })
