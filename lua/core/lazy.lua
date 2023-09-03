@@ -47,6 +47,9 @@ require("lazy").setup({
 			{ "williamboman/mason.nvim" },
 			{ "williamboman/mason-lspconfig.nvim" },
 
+			{ "dnlhc/glance.nvim" },
+			{ "jinzhongjia/LspUI.nvim", branch = "legacy" },
+
 			-- Autocompletion
 			{ "hrsh7th/nvim-cmp" },
 			{ "hrsh7th/cmp-nvim-lsp" },
@@ -145,6 +148,19 @@ require("lazy").setup({
 		"numToStr/Comment.nvim",
 		config = function()
 			require("plugins.comment")
+		end,
+	},
+	{
+		"kevinhwang91/nvim-fundo",
+		dependencies = {
+			"mbbill/undotree",
+			"kevinhwang91/promise-async",
+		},
+		build = function()
+			require("fundo").install()
+		end,
+		config = function()
+			require("plugins.undo")
 		end,
 	},
 })
