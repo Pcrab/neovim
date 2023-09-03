@@ -21,12 +21,10 @@ require("lazy").setup({
 		end,
 	},
 	{
-		"folke/tokyonight.nvim",
+		"rose-pine/neovim",
+		name = "rose-pine",
 		lazy = false,
 		priority = 1000,
-		opts = {
-			transparent = false,
-		},
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
