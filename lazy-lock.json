@@ -38,5 +38,6 @@
   "promise-async": { "branch": "main", "commit": "e94f35161b8c5d4a4ca3b6ff93dd073eb9214c0e" },
   "symbols-outline.nvim": { "branch": "master", "commit": "512791925d57a61c545bc303356e8a8f7869763c" },
   "toggleterm.nvim": { "branch": "main", "commit": "b90a1381e9b5b8596f49070ee86c71db267ac868" },
+  "typescript-tools.nvim": { "branch": "master", "commit": "98165e3cd9d8b1cd0aa7635f1d81a337ae780b55" },
   "undotree": { "branch": "master", "commit": "0e11ba7325efbbb3f3bebe06213afa3e7ec75131" }
 }
