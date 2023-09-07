@@ -89,11 +89,7 @@ require("lazy").setup({
 		end,
 	},
 	{
-		"folke/flash.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("plugins.flash")
-		end,
+		"unblevable/quick-scope",
 	},
 	{
 		"nvim-neo-tree/neo-tree.nvim",
