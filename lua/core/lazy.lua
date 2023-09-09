@@ -13,13 +13,45 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	{
-		"ibhagwan/fzf-lua",
-		-- optional for icon support
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		event = "VeryLazy",
+		"nvim-telescope/telescope.nvim",
+		branch = "0.1.x",
+		dependencies = {
+			{ "nvim-lua/plenary.nvim" },
+			{ "paopaol/telescope-git-diffs.nvim" },
+			{ "nvim-telescope/telescope-fzy-native.nvim" },
+			{ "nvim-telescope/telescope-live-grep-args.nvim" },
+			{ "benfowler/telescope-luasnip.nvim" },
+			{ "nvim-telescope/telescope-dap.nvim" },
+		},
+		cmd = {
+			"Telescope",
+		},
 		config = function()
 			require("plugins.search")
 		end,
+		keys = {
+			{
+				"<leader>ff",
+				function()
+					require("telescope.builtin").find_files()
+				end,
+				desc = "Find files",
+			},
+			{
+				"<leader>f?",
+				function()
+					require("telescope.builtin").help_tags()
+				end,
+				desc = "Help tags",
+			},
+			{
+				"<leader>fg",
+				function()
+					require("telescope").extensions.live_grep_args.live_grep_args()
+				end,
+				desc = "Live grep",
+			},
+		},
 	},
 	{
 		"projekt0n/github-nvim-theme",
@@ -50,6 +82,7 @@ require("lazy").setup({
 
 			{ "dnlhc/glance.nvim" },
 			{ "jinzhongjia/LspUI.nvim", branch = "legacy" },
+			{ "folke/trouble.nvim" },
 
 			-- Autocompletion
 			{ "hrsh7th/nvim-cmp" },
@@ -75,7 +108,7 @@ require("lazy").setup({
 			{ "lewis6991/gitsigns.nvim" },
 			"nvim-lua/plenary.nvim",
 			"sindrets/diffview.nvim",
-			"ibhagwan/fzf-lua",
+			"nvim-telescope/telescope.nvim",
 		},
 		opts = {},
 		keys = {
@@ -128,17 +161,6 @@ require("lazy").setup({
 		config = function()
 			require("plugins.autopair")
 		end,
-	},
-	{
-		"kevinhwang91/nvim-bqf",
-		dependencies = {
-			{
-				"junegunn/fzf",
-				build = function()
-					vim.fn["fzf#install"]()
-				end,
-			},
-		},
 	},
 	{
 		"nvim-neorg/neorg",
@@ -201,8 +223,16 @@ require("lazy").setup({
 		end,
 	},
 	{
-		"pmizio/typescript-tools.nvim",
-		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-		opts = {},
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		init = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 0
+		end,
+		opts = {
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
+		},
 	},
 })

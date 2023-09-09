@@ -4,10 +4,12 @@ require("LspUI").setup({
 	prompt = false,
 })
 
+require("trouble").setup({})
+
 local lsp = require("lsp-zero").preset({})
 
 require("mason-lspconfig").setup({
-	ensure_installed = { "lua_ls", "eslint", "unocss", "zls" },
+	ensure_installed = { "lua_ls", "tsserver", "eslint", "unocss", "zls" },
 })
 
 lsp.on_attach(function(_, bufnr)
@@ -16,6 +18,10 @@ lsp.on_attach(function(_, bufnr)
 	-- lsp.default_keymaps({ buffer = bufnr })
 
 	local opts = { buffer = bufnr, remap = false }
+
+	vim.keymap.set("n", "<leader>xx", function()
+		require("trouble").open()
+	end)
 
 	vim.keymap.set("n", "gd", "<cmd>Glance definitions<cr>", opts)
 	vim.keymap.set("n", "gt", "<cmd>Glance type_definitions<cr>", opts)
