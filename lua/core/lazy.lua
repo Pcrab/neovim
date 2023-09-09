@@ -22,7 +22,7 @@ require("lazy").setup({
 		end,
 	},
 	{
-		"sainnhe/everforest",
+		"projekt0n/github-nvim-theme",
 		lazy = false,
 		priority = 1000,
 	},
@@ -90,6 +90,9 @@ require("lazy").setup({
 	},
 	{
 		"unblevable/quick-scope",
+	},
+	{
+		"LunarVim/bigfile.nvim",
 	},
 	{
 		"nvim-neo-tree/neo-tree.nvim",
