@@ -62,4 +62,11 @@ local opts = {
 	},
 }
 
-require("symbols-outline").setup(opts)
+return {
+
+	"simrat39/symbols-outline.nvim",
+	keys = {
+		{ "<leader>vso", mode = { "n" }, "<cmd>SymbolsOutlineOpen<cr>" },
+	},
+	opts = opts,
+}

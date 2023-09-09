@@ -1,100 +1,168 @@
--- Better UI
-require("glance").setup({})
-require("LspUI").setup({
-	prompt = false,
-})
+return {
+	"williamboman/mason-lspconfig.nvim",
+	dependencies = {
+		"williamboman/mason.nvim",
+		"neovim/nvim-lspconfig",
+		"b0o/SchemaStore.nvim",
+	},
+	config = function()
+		local lspconfig = require("lspconfig")
 
-require("trouble").setup({})
+		local capabilities = require("core.capabilities")
 
-local lsp = require("lsp-zero").preset({})
+		require("mason").setup()
+		require("mason-lspconfig").setup({
+			handlers = {
+				function(server)
+					lspconfig[server].setup({ capabilities = capabilities })
+				end,
 
-require("mason-lspconfig").setup({
-	ensure_installed = { "lua_ls", "tsserver", "eslint", "unocss", "zls" },
-})
+				tsserver = function() end,
+				unocss = function() end,
 
-lsp.on_attach(function(_, bufnr)
-	-- see :help lsp-zero-keybindings
-	-- to learn the available actions
-	-- lsp.default_keymaps({ buffer = bufnr })
+				lua_ls = function()
+					lspconfig.lua_ls.setup({
+						on_attach = function(client, bufnr)
+							client.server_capabilities.documentFormattingProvider = false
+						end,
+						capabilities = capabilities,
+						settings = {
+							Lua = {
+								hint = {
+									enable = true,
+									setType = true,
+								},
+								codelens = {
+									enable = true,
+								},
+								completion = {
+									callSnippet = "Replace",
+									postfix = ".",
+									showWord = "Disable",
+									workspaceWord = false,
+								},
+							},
+						},
+					})
+				end,
 
-	local opts = { buffer = bufnr, remap = false }
+				jsonls = function()
+					lspconfig.jsonls.setup({
+						settings = {
+							json = {
+								schemas = require("schemastore").json.schemas(),
+								validate = { enable = true },
+							},
+						},
+						on_attach = function(client, bufnr)
+							client.server_capabilities.documentFormattingProvider = false
+						end,
+						capabilities = capabilities,
+					})
+				end,
 
-	vim.keymap.set("n", "<leader>xx", function()
-		require("trouble").open()
-	end)
+				yamlls = function()
+					lspconfig.yamlls.setup({
+						capabilities = capabilities.capabilities,
+						settings = {
+							yaml = {
+								keyOrdering = false,
+								schemaStore = {
+									enable = false,
+									url = "",
+								},
+								schemas = require("schemastore").yaml.schemas(),
+							},
+						},
+					})
+				end,
+			},
+		})
 
-	vim.keymap.set("n", "gd", "<cmd>Glance definitions<cr>", opts)
-	vim.keymap.set("n", "gt", "<cmd>Glance type_definitions<cr>", opts)
-	vim.keymap.set("n", "gr", "<cmd>Glance references<cr>", opts)
-	vim.keymap.set("n", "gi", "<cmd>Glance implementations<cr>", opts)
-	vim.keymap.set("n", "K", "<cmd>LspUI hover<cr>", opts)
-	vim.keymap.set("n", "<leader>vca", "<cmd>LspUI code_action<cr>", opts)
-	vim.keymap.set("n", "<leader>vrn", "<cmd>LspUI rename<cr>", opts)
-	vim.keymap.set("n", "[d", "<cmd>LspUI diagnostic next<cr>", opts)
-	vim.keymap.set("n", "]d", "<cmd>LspUI diagnostic prev<cr>", opts)
-	vim.keymap.set("n", "<leader>vd", function()
-		vim.diagnostic.open_float()
-	end, opts)
-	vim.keymap.set("n", "<leader>vws", function()
-		vim.lsp.buf.workspace_symbol()
-	end, opts)
-	vim.keymap.set("n", "<C-h>", function()
-		vim.lsp.buf.signature_help()
-	end, opts)
-end)
+		-- Set diagnostic options
+		vim.diagnostic.config({
+			virtual_text = {
+				spacing = 4,
+				prefix = "●",
+				severity = vim.diagnostic.severity.ERROR,
+			},
+			float = {
+				severity_sort = true,
+				source = "if_many",
+			},
+			severity_sort = true,
+		})
 
--- (Optional) Configure lua language server for neovim
-require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls())
-require("lspconfig").ocamllsp.setup({})
+		vim.api.nvim_create_autocmd("LspAttach", {
+			desc = "General LSP Attach",
+			callback = function(args)
+				local bufnr = args.buf
+				local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-lsp.setup()
+				-- Setup keymaps
+				vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr, desc = "LSP: Hover" })
+				vim.keymap.set(
+					{ "n", "i" },
+					"<C-k>",
+					vim.lsp.buf.signature_help,
+					{ buffer = bufnr, desc = "LSP: Signature help" }
+				)
 
-local has_words_before = function()
-	unpack = unpack or table.unpack
-	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
-local luasnip = require("luasnip")
+				vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { buffer = bufnr, desc = "Diagnostic" })
+				vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { buffer = bufnr, desc = "Diagnostic" })
 
-local cmp = require("cmp")
--- local cmp_action = require("lsp-zero").cmp_action()
+				vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "Definition" })
+				vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr, desc = "Declaration" })
+				vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { buffer = bufnr, desc = "Implementation" })
+				vim.keymap.set("n", "gr", function()
+					vim.lsp.buf.references({ include_declaration = false })
+				end, { buffer = bufnr, desc = "References" })
 
-cmp.setup({
-	mapping = {
-		["<Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_next_item()
-				-- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-				-- they way you will only jump inside the snippet region
-			elseif luasnip.expand_or_jumpable() then
-				luasnip.expand_or_jump()
-			elseif has_words_before() then
-				cmp.complete()
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
+				vim.keymap.set("n", "<leader>ln", vim.lsp.buf.rename, { buffer = bufnr, desc = "Rename" })
+				vim.keymap.set(
+					{ "n", "v" },
+					"<leader>la",
+					vim.lsp.buf.code_action,
+					{ buffer = bufnr, desc = "Code action" }
+				)
+				vim.keymap.set(
+					"n",
+					"<leader>ll",
+					vim.diagnostic.setloclist,
+					{ buffer = bufnr, desc = "Diagnostic list" }
+				)
+				vim.keymap.set(
+					"n",
+					"<leader>ld",
+					vim.diagnostic.open_float,
+					{ buffer = bufnr, desc = "Diagnostic float" }
+				)
 
-		["<S-Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_prev_item()
-			elseif luasnip.jumpable(-1) then
-				luasnip.jump(-1)
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
+				-- Use conform instead
+				-- vim.keymap.set("n", "<leader>F", function()
+				--   vim.lsp.buf.format { async = true }
+				-- end, { buffer = bufnr, desc = "Format document" })
 
-		["<CR>"] = cmp.mapping({
-			i = function(fallback)
-				if cmp.visible() and cmp.get_active_entry() then
-					cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-				else
-					fallback()
+				vim.keymap.set(
+					"n",
+					"<leader>lwa",
+					vim.lsp.buf.add_workspace_folder,
+					{ buffer = bufnr, desc = "Add workspace folder" }
+				)
+				vim.keymap.set(
+					"n",
+					"<leader>lwr",
+					vim.lsp.buf.remove_workspace_folder,
+					{ buffer = bufnr, desc = "Remove workspace folder" }
+				)
+				vim.keymap.set("n", "<leader>lwl", function()
+					print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+				end, { buffer = bufnr, desc = "List workspace folders" })
+				-- Enable inlay hints
+				if client and client.server_capabilities.inlayHintProvider then
+					vim.lsp.inlay_hint(bufnr, true)
 				end
 			end,
-			s = cmp.mapping.confirm({ select = true }),
-			c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-		}),
-	},
-})
+		})
+	end,
+}
