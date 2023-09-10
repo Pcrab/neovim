@@ -12,11 +12,14 @@ return {
 
 		require("mason").setup()
 		require("mason-lspconfig").setup({
-			ensure_installed = { "lua_ls", "jsonls", "yamlls" },
+			ensure_installed = { "lua_ls", "jsonls", "yamlls", "unocss" },
 		})
 
 		-- Config lsps
 		lspconfig.ocamllsp.setup({
+			capabilities = capabilities,
+		})
+		lspconfig.unocss.setup({
 			capabilities = capabilities,
 		})
 		lspconfig.jsonls.setup({

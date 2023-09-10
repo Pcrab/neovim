@@ -8,6 +8,7 @@ return {
 			lua = { "stylua" },
 			-- Conform will use the first available formatter in the list
 			javascript = { "prettier_d", "prettier" },
+			typescript = { "prettier_d", "prettier" },
 			-- Formatters can also be specified with additional options
 			python = {
 				formatters = { "isort", "black" },
