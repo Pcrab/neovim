@@ -15,6 +15,8 @@ return {
                 -- Run formatters one after another instead of stopping at the first success
                 run_all_formatters = true,
             },
+            c = { "clang_format" },
+            cpp = { "clang_format" },
         },
         format_on_save = {
             -- These options will be passed to conform.format()
