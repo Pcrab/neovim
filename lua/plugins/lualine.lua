@@ -31,6 +31,7 @@ local opts = {
 	sections = {
 		lualine_c = {
 			lsp,
+			"filename",
 		},
 		lualine_x = {
 			{
