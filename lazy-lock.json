@@ -1,5 +1,6 @@
 {
   "Comment.nvim": { "branch": "master", "commit": "0236521ea582747b58869cb72f70ccfa967d2e89" },
+  "Ionide-vim": { "branch": "master", "commit": "8435bae84b26b602dbb68399661b3989915cc4d3" },
   "LuaSnip": { "branch": "master", "commit": "ea7d7ea510c641c4f15042becd27f35b3e5b3c2b" },
   "SchemaStore.nvim": { "branch": "main", "commit": "c0874b9eb5e9aecd27e122ebfe7490516ac02bd3" },
   "bigfile.nvim": { "branch": "main", "commit": "9616b73670ffeb92679677554ded88854ae42cf8" },
