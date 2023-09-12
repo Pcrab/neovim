@@ -100,5 +100,44 @@ return {
         }
         dap.configurations.c = dap.configurations.cpp
         dap.configurations.rust = dap.configurations.cpp
+        dap.configurations.zig = dap.configurations.cpp
+
+        dap.adapters.coreclr = {
+            type = "executable",
+            command = "netcoredbg",
+            args = { "--interpreter=vscode" },
+        }
+        dap.configurations.cs = {
+            {
+                type = "coreclr",
+                name = "launch - netcoredbg",
+                request = "launch",
+                program = function()
+                    return vim.fn.input("Path to dll", vim.fn.getcwd() .. "/bin/Debug/", "file")
+                end,
+            },
+        }
+        dap.configurations.fsharp = dap.configurations.cs
+
+        dap.adapters.mix_task = {
+            type = "executable",
+            command = "elixir-ls-debugger",
+            args = {},
+        }
+        dap.configurations.elixir = {
+            {
+                type = "mix_task",
+                name = "mix test",
+                task = "test",
+                taskArgs = { "--trace" },
+                request = "launch",
+                startApps = true, -- for Phoenix projects
+                projectDir = "${workspaceFolder}",
+                requireFiles = {
+                    "test/**/test_helper.exs",
+                    "test/**/*_test.exs",
+                },
+            },
+        }
     end,
 }
