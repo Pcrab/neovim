@@ -6,9 +6,9 @@ return {
     config = function()
         require("conform").setup({
             formatters = {
-                elixir = {
-                    command = "mix",
-                    args = { "format", "--stdin-filename", "$FILENAME", "-" },
+                fourmolu = {
+                    command = "fourmolu",
+                    args = { "$FILENAME" },
                     cwd = require("conform.util").root_file({ ".formatter.exs" }),
                 },
             },
@@ -25,7 +25,7 @@ return {
                 },
                 c = { "clang_format" },
                 cpp = { "clang_format" },
-                elixir = { "elixir" },
+                haskell = { "fourmolu" },
             },
             format_on_save = {
                 -- These options will be passed to conform.format()

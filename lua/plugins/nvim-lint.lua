@@ -7,6 +7,7 @@ return {
             typescript = { "eslint" },
             c = { "cppcheck" },
             cpp = { "cppcheck" },
+            haskell = { "hlint" },
         }
 
         vim.api.nvim_create_autocmd({ "BufWritePost" }, {

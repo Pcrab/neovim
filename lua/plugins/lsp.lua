@@ -22,10 +22,6 @@ return {
         lspconfig.unocss.setup({
             capabilities = capabilities,
         })
-        lspconfig.elixirls.setup({
-            cmd = { "elixir-ls" },
-            capabilities = capabilities,
-        })
         lspconfig.jsonls.setup({
             settings = {
                 json = {
@@ -74,6 +70,9 @@ return {
                     },
                 },
             },
+        })
+        lspconfig.hls.setup({
+            capabilities = capabilities,
         })
     end,
 }
