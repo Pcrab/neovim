@@ -8,7 +8,7 @@ return {
             formatters = {
                 fourmolu = {
                     command = "fourmolu",
-                    args = { "$FILENAME" },
+                    args = { "--stdin-input-file", "$FILENAME" },
                     cwd = require("conform.util").root_file({ ".formatter.exs" }),
                 },
             },
