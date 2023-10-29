@@ -35,9 +35,6 @@ local function toggle_quickfix()
 end
 
 vim.keymap.set("n", "<leader>q", toggle_quickfix, { desc = "Quickfix" })
-vim.keymap.set("n", "<leader>hi", function()
-    vim.show_pos()
-end, { desc = "Inspect" })
 
 local filetype_keymaps = vim.api.nvim_create_augroup("ofseed_filetype_keymaps", {})
 vim.api.nvim_create_autocmd("Filetype", {
