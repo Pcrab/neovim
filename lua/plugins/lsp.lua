@@ -4,6 +4,7 @@ return {
         "williamboman/mason.nvim",
         "neovim/nvim-lspconfig",
         "b0o/SchemaStore.nvim",
+        "VidocqH/lsp-lens.nvim",
     },
     config = function()
         local lspconfig = require("lspconfig")
@@ -74,5 +75,7 @@ return {
         lspconfig.hls.setup({
             capabilities = capabilities,
         })
+
+        require("lsp-lens").setup({})
     end,
 }

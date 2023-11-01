@@ -40,6 +40,7 @@ return {
             function()
                 require("trouble").open("lsp_references")
             end,
+            -- TODO: test
             desc = "LSP References",
         },
     },
