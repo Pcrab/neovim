@@ -11,6 +11,11 @@ return {
                     args = { "--stdin-input-file", "$FILENAME" },
                     cwd = require("conform.util").root_file({ ".formatter.exs" }),
                 },
+                cabalfmt = {
+                    command = "cabal-fmt",
+                    args = { "--inplace", "$FILENAME" },
+                    stdin = false,
+                },
             },
             formatters_by_ft = {
                 lua = { "stylua" },
@@ -26,6 +31,7 @@ return {
                 c = { "clang_format" },
                 cpp = { "clang_format" },
                 haskell = { "fourmolu" },
+                cabal = { "cabalfmt" },
             },
             format_on_save = {
                 -- These options will be passed to conform.format()

@@ -13,13 +13,19 @@ return {
 
         require("mason").setup()
         require("mason-lspconfig").setup({
-            ensure_installed = { "clangd", "lua_ls", "jsonls", "yamlls" },
+            ensure_installed = { "clangd", "lua_ls", "jsonls", "yamlls", "elixirls" },
         })
 
         -- Config lsps
         lspconfig.clangd.setup({
             capabilities = capabilities,
         })
+
+        lspconfig.elixirls.setup({
+            -- Unix
+            cmd = { "elixir-ls" },
+        })
+
         lspconfig.unocss.setup({
             capabilities = capabilities,
         })
@@ -71,9 +77,6 @@ return {
                     },
                 },
             },
-        })
-        lspconfig.hls.setup({
-            capabilities = capabilities,
         })
 
         require("lsp-lens").setup({})
