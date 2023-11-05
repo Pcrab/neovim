@@ -10,11 +10,15 @@ return {
 
         -- haskell
         "MrcJkb/neotest-haskell",
+
+        -- Elixir
+        "jfpedroza/neotest-elixir",
     },
     config = function()
         require("neotest").setup({
             adapters = {
                 require("neotest-haskell"),
+                require("neotest-elixir"),
                 require("neotest-jest")({
                     jestCommand = "pnpm test --",
                     jestConfigFile = "custom.jest.config.ts",

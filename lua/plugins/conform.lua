@@ -16,6 +16,11 @@ return {
                     args = { "--inplace", "$FILENAME" },
                     stdin = false,
                 },
+                elixir = {
+                    command = "mix",
+                    args = { "format", "--stdin-filename", "$FILENAME", "-" },
+                    cwd = require("conform.util").root_file({ ".formatter.exs" }),
+                },
             },
             formatters_by_ft = {
                 lua = { "stylua" },
@@ -32,6 +37,7 @@ return {
                 cpp = { "clang_format" },
                 haskell = { "fourmolu" },
                 cabal = { "cabalfmt" },
+                elixir = { "elixir" },
             },
             format_on_save = {
                 -- These options will be passed to conform.format()
