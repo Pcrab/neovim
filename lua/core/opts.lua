@@ -30,3 +30,7 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 
 vim.g.everforest_transparent_background = 1
+
+if vim.g.neovide then
+    vim.g.neovide_transparency = 0.75
+end

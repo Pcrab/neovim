@@ -21,6 +21,11 @@ return {
                     args = { "format", "--stdin-filename", "$FILENAME", "-" },
                     cwd = require("conform.util").root_file({ ".formatter.exs" }),
                 },
+                nimpretty = {
+                    command = "nimpretty",
+                    args = { "--indent:4", "$FILENAME" },
+                    stdin = false,
+                },
             },
             formatters_by_ft = {
                 lua = { "stylua" },
@@ -38,6 +43,7 @@ return {
                 haskell = { "fourmolu" },
                 cabal = { "cabalfmt" },
                 elixir = { "elixir" },
+                nim = { "nimpretty" },
             },
             format_on_save = {
                 -- These options will be passed to conform.format()

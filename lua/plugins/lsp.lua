@@ -13,17 +13,12 @@ return {
 
         require("mason").setup()
         require("mason-lspconfig").setup({
-            ensure_installed = { "clangd", "lua_ls", "jsonls", "yamlls", "elixirls" },
+            ensure_installed = { "clangd", "lua_ls", "jsonls", "yamlls", "nim_langserver" },
         })
 
         -- Config lsps
         lspconfig.clangd.setup({
             capabilities = capabilities,
-        })
-
-        lspconfig.elixirls.setup({
-            -- Unix
-            cmd = { "elixir-ls" },
         })
 
         lspconfig.unocss.setup({
@@ -39,6 +34,9 @@ return {
             on_attach = function(client, bufnr)
                 client.server_capabilities.documentFormattingProvider = false
             end,
+            capabilities = capabilities,
+        })
+        lspconfig.nim_langserver.setup({
             capabilities = capabilities,
         })
 
