@@ -13,7 +13,14 @@ return {
 
         require("mason").setup()
         require("mason-lspconfig").setup({
-            ensure_installed = { "clangd", "lua_ls", "jsonls", "yamlls", "nim_langserver" },
+            ensure_installed = {
+                "clangd",
+                "clojure_lsp",
+                "lua_ls",
+                "jsonls",
+                "yamlls",
+                "nim_langserver",
+            },
         })
 
         -- Config lsps
@@ -37,6 +44,15 @@ return {
             capabilities = capabilities,
         })
         lspconfig.nim_langserver.setup({
+            capabilities = capabilities,
+        })
+        lspconfig.clojure_lsp.setup({
+            capabilities = capabilities,
+        })
+        lspconfig.zls.setup({
+            capabilities = capabilities,
+        })
+        lspconfig.kotlin_language_server.setup({
             capabilities = capabilities,
         })
 

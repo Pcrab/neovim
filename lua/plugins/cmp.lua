@@ -14,6 +14,7 @@ return {
         { "hrsh7th/cmp-calc" },
         { "saadparwaiz1/cmp_luasnip" },
         { "lukas-reineke/cmp-under-comparator" },
+        { "PaterJason/cmp-conjure" },
     },
     config = function()
         local cmp = require("cmp")
@@ -94,6 +95,7 @@ return {
                 },
                 { name = "path" },
                 { name = "calc" },
+                { name = "conjure" },
             },
             formatting = {
                 format = lspkind.cmp_format({

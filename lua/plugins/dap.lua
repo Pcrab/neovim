@@ -113,7 +113,23 @@ return {
             mode = { "n" },
             desc = "toggle breakpoint",
             function()
-                require("dap").toggle_breakpoint()
+                require("persistent-breakpoints.api").toggle_breakpoint()
+            end,
+        },
+        {
+            "<leader>dbc",
+            mode = { "n" },
+            desc = "conditional breakpoint",
+            function()
+                require("persistent-breakpoints.api").set_conditional_breakpoint()
+            end,
+        },
+        {
+            "<leader>dbr",
+            mode = { "n" },
+            desc = "clear all breakpoint",
+            function()
+                require("persistent-breakpoints.api").clear_all_breakpoints()
             end,
         },
         {
