@@ -1,82 +1,82 @@
 return {
-    "nvim-treesitter/nvim-treesitter",
-    event = "VeryLazy",
-    dependencies = {
-        { "JoosepAlviste/nvim-ts-context-commentstring" },
-        { "RRethy/nvim-treesitter-endwise" },
-
-        {
-            "nvim-treesitter/nvim-treesitter-context",
-            event = "VeryLazy",
-            opts = {
-                mode = "topline",
-            },
-            keys = {
-                { "<leader>tc", "<Cmd>TSContextToggle<CR>", desc = "Treesitter Context" },
-            },
-        },
-        { "nvim-treesitter/nvim-treesitter-textobjects" },
-        { "RRethy/nvim-treesitter-textsubjects" },
-        { "windwp/nvim-ts-autotag" },
-    },
-    build = ":TSUpdate",
-    config = function()
-        if vim.loop.os_uname().sysname == "win32" then
-            require("nvim-treesitter.install").prefer_git = false
-        end
-
-        require("nvim-treesitter.configs").setup({
-            ensure_installed = "all",
-
-            auto_install = true,
-
-            highlight = {
-                enable = true,
-                additional_vim_regex_highlighting = false,
-            },
-            indent = {
-                enable = true,
-            },
-            autotag = {
-                enable = true,
-            },
-            endwise = {
-                enable = true,
-            },
-            context_commentstring = {
-                enable = true,
-            },
-
-            textobjects = {
-                select = {
+    {
+        "nvim-treesitter/nvim-treesitter",
+        event = { "BufReadPost", "BufNewFile" },
+        cmd = { "TSUpdate", "TSUpdateSync" },
+        dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
+        build = ":TSUpdate",
+        config = function()
+            ---@diagnostic disable-next-line: missing-fields
+            require("nvim-treesitter.configs").setup({
+                ensure_installed = "all",
+                highlight = {
                     enable = true,
-                    lookahead = true,
-                    keymaps = {
-                        -- You can use the capture groups defined in textobjects.scm
-                        ["af"] = "@function.outer",
-                        ["if"] = "@function.inner",
-                        ["ac"] = "@class.outer",
-                        -- You can optionally set descriptions to the mappings (used in the desc parameter of
-                        -- nvim_buf_set_keymap) which plugins like which-key display
-                        ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+                    highlight = {
+                        enable = true,
+                        disable = function(lang, bufnr)
+                            if lang == "html" and vim.api.nvim_buf_line_count(bufnr) > 500 then
+                                return true
+                            end
+                            for _, line in ipairs(vim.api.nvim_buf_get_lines(0, 0, 3, false)) do
+                                if #line > 500 then
+                                    return true
+                                end
+                            end
+                            return false
+                        end,
                     },
-                    selection_modes = {
-                        ["@parameter.outer"] = "v", -- charwise
-                        ["@function.outer"] = "V", -- linewise
-                        ["@class.outer"] = "<c-v>", -- blockwise
+                },
+                -- 'JoosepAlviste/nvim-ts-context-commentstring'
+                context_commentstring = {
+                    enable = true,
+                },
+            })
+        end,
+    },
+    {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        event = { "BufReadPost", "BufNewFile" },
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
+        config = function()
+            require("nvim-treesitter.configs").setup({
+                textobjects = {
+                    select = {
+                        enable = true,
+                        lookahead = true,
+                        keymaps = {
+                            -- You can use the capture groups defined in textobjects.scm
+                            ["af"] = "@function.outer",
+                            ["if"] = "@function.inner",
+                            ["ac"] = "@class.outer",
+                            -- You can optionally set descriptions to the mappings (used in the desc parameter of
+                            -- nvim_buf_set_keymap) which plugins like which-key display
+                            ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+                            -- You can also use captures from other query groups like `locals.scm`
+                            ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+                        },
                     },
-                    include_surrounding_whitespace = true,
+                    move = {
+                        enable = true,
+                        set_jumps = true, -- whether to set jumps in the jumplist
+                        goto_next_start = {
+                            ["]f"] = "@function.outer",
+                            ["]c"] = "@class.outer",
+                        },
+                        goto_next_end = {
+                            ["]F"] = "@function.outer",
+                            ["]C"] = "@class.outer",
+                        },
+                        goto_previous_start = {
+                            ["[f"] = "@function.outer",
+                            ["[c"] = "@class.outer",
+                        },
+                        goto_previous_end = {
+                            ["[F"] = "@function.outer",
+                            ["[C"] = "@class.outer",
+                        },
+                    },
                 },
-            },
-            textsubjects = {
-                enable = true,
-                prev_selection = ",", -- (Optional) keymap to select the previous selection
-                keymaps = {
-                    ["."] = "textsubjects-smart",
-                    [";"] = "textsubjects-container-outer",
-                    ["i;"] = "textsubjects-container-inner",
-                },
-            },
-        })
-    end,
+            })
+        end,
+    },
 }

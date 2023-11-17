@@ -1,80 +1,48 @@
 return {
-	"nvim-telescope/telescope.nvim",
-	branch = "0.1.x",
-	dependencies = {
-		{ "nvim-lua/plenary.nvim" },
-		{ "paopaol/telescope-git-diffs.nvim" },
-		{ "nvim-telescope/telescope-fzy-native.nvim" },
-		{ "nvim-telescope/telescope-live-grep-args.nvim" },
-		{ "benfowler/telescope-luasnip.nvim" },
-		{ "nvim-telescope/telescope-dap.nvim" },
-	},
-	cmd = {
-		"Telescope",
-	},
-	config = function()
-		local telescope = require("telescope")
-		local lga_actions = require("telescope-live-grep-args.actions")
-
-		telescope.setup({
-			extensions = {
-				fzy_native = {
-					override_generic_sorter = false,
-					override_file_sorter = true,
-				},
-				live_grep_args = {
-					auto_quoting = true, -- enable/disable auto-quoting
-					-- define mappings, e.g.
-					mappings = { -- extend mappings
-						i = {
-							["<C-k>"] = lga_actions.quote_prompt(),
-							["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
-						},
-					},
-					-- ... also accepts theme settings, for example:
-					-- theme = "dropdown", -- use dropdown theme
-					-- theme = { }, -- use own theme spec
-					-- layout_config = { mirror=true }, -- mirror preview pane
-				},
-			},
-		})
-
-		local extensions = {
-			"dap",
-			"fzy_native",
-			"git_diffs",
-			"live_grep_args",
-			"luasnip",
-		}
-
-		for _, ext in ipairs(extensions) do
-			local ok = pcall(telescope.load_extension, ext)
-			if not ok then
-				vim.print("Failed to load telescope extension: " .. ext)
-			end
-		end
-	end,
-	keys = {
-		{
-			"<leader>ff",
-			function()
-				require("telescope.builtin").find_files()
-			end,
-			desc = "Find files",
-		},
-		{
-			"<leader>f?",
-			function()
-				require("telescope.builtin").help_tags()
-			end,
-			desc = "Help tags",
-		},
-		{
-			"<leader>fg",
-			function()
-				require("telescope").extensions.live_grep_args.live_grep_args()
-			end,
-			desc = "Live grep",
-		},
-	},
+    {
+        "nvim-telescope/telescope.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            { "nvim-lua/plenary.nvim" },
+            { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+            "rmagatti/auto-session",
+        },
+        config = function()
+            require("telescope").load_extension("fzf")
+            require("telescope").setup({
+                defaults = {
+                    preview = {
+                        filesize_limit = 0.5,
+                        timeout = 100,
+                    },
+                },
+                extensions = {
+                    fzf = {
+                        fuzzy = true,
+                        override_generic_sorter = true,
+                        override_file_sorter = true,
+                        case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+                    },
+                },
+            })
+            vim.keymap.set("n", "<leader>ff", require("telescope.builtin").find_files, { desc = "Find files" })
+            vim.keymap.set("n", "<leader>fg", require("telescope.builtin").live_grep, { desc = "Grep in files" })
+            vim.keymap.set("n", "<leader>fb", require("telescope.builtin").buffers, { desc = "Find buffer" })
+            vim.keymap.set("n", "<leader>fh", require("telescope.builtin").help_tags, { desc = "Find help" })
+            vim.keymap.set("n", "<leader>fm", require("telescope.builtin").marks, { desc = "Find mark" })
+            vim.keymap.set(
+                "n",
+                "<leader>fy",
+                require("telescope.builtin").lsp_workspace_symbols,
+                { desc = "Find lsp symbol" }
+            )
+            require("auto-session").setup_session_lens()
+            vim.keymap.set(
+                "n",
+                "<leader>fs",
+                require("auto-session.session-lens").search_session,
+                { desc = "Find session", noremap = true }
+            )
+        end,
+    },
 }
