@@ -84,6 +84,14 @@ servers.html = {
     autoload = true,
 }
 
+servers.ruff_lsp = {
+    autoload = true,
+}
+
+servers.pylyzer = {
+    autoload = true,
+}
+
 servers.zls = {
     autoload = true,
 }
@@ -102,6 +110,7 @@ local filetypes = {
     yaml = { enable = true, formatters = { "prettier" } },
     markdown = { enable = true, formatters = { "prettier" } },
     typescript = { enable = true, formatters = { "prettier" }, linters = { "eslint_d" } },
+    python = { enable = true },
 }
 
 return {

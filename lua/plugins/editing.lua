@@ -13,6 +13,13 @@ return {
         },
     },
     {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        config = function()
+            require("nvim-autopairs").setup({ check_ts = true })
+        end,
+    },
+    {
         "numToStr/Comment.nvim",
         event = { "BufReadPost", "BufNewFile" },
         dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
@@ -21,6 +28,14 @@ return {
                 pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
             })
         end,
+    },
+    {
+        "akinsho/toggleterm.nvim",
+        version = "*",
+        opts = {
+            open_mapping = [[<c-\>]],
+            direction = "float",
+        },
     },
     {
         "folke/neodev.nvim",
