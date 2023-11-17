@@ -40,30 +40,30 @@ return {
                     ["<C-p>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
                     ["<C-n>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
                     ["<CR>"] = cmp.mapping.confirm({ select = true }),
-                    ["<Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_next_item()
-                        elseif has_words_before() then
-                            cmp.complete()
-                        else
-                            fallback()
-                        end
-                    end, {
-                        "i",
-                        "s",
-                        "c",
-                    }),
-                    ["<S-Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_prev_item()
-                        else
-                            fallback()
-                        end
-                    end, {
-                        "i",
-                        "s",
-                        "c",
-                    }),
+                    -- ["<Tab>"] = cmp.mapping(function(fallback)
+                    --     if cmp.visible() then
+                    --         cmp.select_next_item()
+                    --     elseif has_words_before() then
+                    --         cmp.complete()
+                    --     else
+                    --         fallback()
+                    --     end
+                    -- end, {
+                    --     "i",
+                    --     "s",
+                    --     "c",
+                    -- }),
+                    -- ["<S-Tab>"] = cmp.mapping(function(fallback)
+                    --     if cmp.visible() then
+                    --         cmp.select_prev_item()
+                    --     else
+                    --         fallback()
+                    --     end
+                    -- end, {
+                    --     "i",
+                    --     "s",
+                    --     "c",
+                    -- }),
                 },
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },

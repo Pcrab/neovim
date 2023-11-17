@@ -1,55 +1,32 @@
-local function config()
-    local theme = {
-        fill = "TabLineFill",
-        -- Also you can do this: fill = { fg='#f2e9de', bg='#907aa9', style='italic' }
-        head = "TabLine",
-        current_tab = "TabLineSel",
-        tab = "TabLine",
-        win = "TabLine",
-        tail = "TabLine",
-    }
-    require("tabby.tabline").set(function(line)
-        return {
-            {
-                { "  ", hl = theme.head },
-                line.sep("", theme.head, theme.fill),
-            },
-            line.tabs().foreach(function(tab)
-                local hl = tab.is_current() and theme.current_tab or theme.tab
-                return {
-                    line.sep("", hl, theme.fill),
-                    tab.is_current() and "" or "󰆣",
-                    tab.number(),
-                    tab.name(),
-                    tab.close_btn(""),
-                    line.sep("", hl, theme.fill),
-                    hl = hl,
-                    margin = " ",
-                }
-            end),
-            line.spacer(),
-            line.wins_in_tab(line.api.get_current_tab()).foreach(function(win)
-                return {
-                    line.sep("", theme.win, theme.fill),
-                    win.is_current() and "" or "",
-                    win.buf_name(),
-                    line.sep("", theme.win, theme.fill),
-                    hl = theme.win,
-                    margin = " ",
-                }
-            end),
-            {
-                line.sep("", theme.tail, theme.fill),
-                { "  ", hl = theme.tail },
-            },
-            hl = theme.fill,
-        }
-    end)
-end
-
 return {
-    "nanozuki/tabby.nvim",
-    event = "VimEnter",
-    dependencies = "nvim-tree/nvim-web-devicons",
-    config = config,
+    {
+        "akinsho/bufferline.nvim",
+        version = "*",
+        dependencies = "nvim-tree/nvim-web-devicons",
+        lazy = false,
+        keys = {
+            { "<Tab>", "<CMD>BufferLineCycleNext<CR>", desc = "Next tab" },
+            { "<S-Tab>", "<CMD>BufferLineCyclePrev<CR>", desc = "Prev tab" },
+
+            { "<leader>to", "<CMD>BufferLineCloseOthers<CR>", desc = "Close other tabs" },
+            { "<leader>tx", "<CMD>BufferLinePickClose<CR>", desc = "Pick tab to close" },
+            { "<leader>tp", "<CMD>BufferLinePick<CR>", desc = "Pick tab" },
+
+            { "<leader>tmn", "<CMD>BufferLineMoveNext<CR>", desc = "Move current tab to next" },
+            { "<leader>tmp", "<CMD>BufferLineMovePrev<CR>", desc = "Move current tab to prev" },
+
+            -- vim.keymap.set("n", "<leader>tc", ":$tabnew<CR>", { desc = "Create new tab" })
+            -- vim.keymap.set("n", "<leader>tx", ":tabclose<CR>", { desc = "Close current tab" })
+            -- vim.keymap.set("n", "<leader>to", ":tabonly<CR>", { desc = "Close other tabs" })
+            -- vim.keymap.set("n", "<leader>tmp", ":-tabmove<CR>", { desc = "Move current tab to previous position" })
+            -- vim.keymap.set("n", "<leader>tmn", ":+tabmove<CR>", { desc = "Move current tab to next position " })
+        },
+        opts = {
+            options = {
+                mode = true,
+                show_buffer_close_icon = false,
+                show_close_icon = false,
+            },
+        },
+    },
 }

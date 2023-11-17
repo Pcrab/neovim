@@ -34,15 +34,6 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 
--- Tab
-vim.keymap.set("n", "<leader>tc", ":$tabnew<CR>", { desc = "Create new tab" })
-vim.keymap.set("n", "<leader>tx", ":tabclose<CR>", { desc = "Close current tab" })
-vim.keymap.set("n", "<leader>to", ":tabonly<CR>", { desc = "Close other tabs" })
-vim.keymap.set("n", "<leader>tp", ":tabp<CR>", { desc = "Switch to prev tab" })
-vim.keymap.set("n", "<leader>tn", ":tabn<CR>", { desc = "Switch to next tab" })
-vim.keymap.set("n", "<leader>tmp", ":-tabmove<CR>", { desc = "Move current tab to previous position" })
-vim.keymap.set("n", "<leader>tmn", ":+tabmove<CR>", { desc = "Move current tab to next position " })
-
 -- Diagnostic
 -- Diagnostic - keymap
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open diagnostic floating window" })
