@@ -12,6 +12,13 @@ return {
             "nvim-tree/nvim-web-devicons",
             "MunifTanjim/nui.nvim",
         },
+        opts = {
+            filesystem = {
+                filtered_items = {
+                    hide_dotfiles = false,
+                },
+            },
+        },
     },
     -- filesystem editor
     {

@@ -92,6 +92,10 @@ servers.pylyzer = {
     autoload = true,
 }
 
+servers.ltex = {
+    autoload = true,
+}
+
 servers.zls = {
     autoload = true,
 }

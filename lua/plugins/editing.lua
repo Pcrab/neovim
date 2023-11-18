@@ -119,6 +119,7 @@ return {
                     },
                     -- c = { "clang_format" },
                     -- cpp = { "clang_format" },
+                    markdown = {},
                 },
                 format_on_save = function(bufnr)
                     -- Disable with a global or buffer-local variable
