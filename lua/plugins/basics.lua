@@ -24,4 +24,11 @@ return {
             vim.keymap.set("n", "<leader>ss", "<cmd>SessionSave<cr>", { desc = "Save session" })
         end,
     },
+    {
+        "folke/neoconf.nvim",
+        priority = 0,
+        lazy = false,
+        opts = {},
+    },
+    { "wakatime/vim-wakatime" },
 }

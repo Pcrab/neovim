@@ -45,6 +45,7 @@ return {
             "ray-x/lsp_signature.nvim",
             "hrsh7th/cmp-nvim-lsp",
             "b0o/schemastore.nvim",
+            "folke/neoconf.nvim",
         },
     },
     -- # load after nvim-lspconfig
