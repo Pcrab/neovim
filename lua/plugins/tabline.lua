@@ -1,6 +1,7 @@
 return {
     {
         "nanozuki/tabby.nvim",
+        priority = 1,
         lazy = false,
         config = function()
             local values = require("core.values")

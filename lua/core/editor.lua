@@ -48,7 +48,15 @@ end
 
 -- Neovide
 if vim.g.neovide then
-    vim.g.neovide_transparency = 0.75
+    local font_size = 16
+    local function build_font(font_names)
+        for k, v in pairs(font_names) do
+            font_names[k] = v .. ":h" .. font_size
+        end
+        return table.concat(font_names, ",")
+    end
+    vim.g.neovide_transparency = 0.9
+    vim.o.guifont = build_font({ "Maple Mono", "JetbrainsMono Nerd Font" })
 end
 
 -- Quickfix
