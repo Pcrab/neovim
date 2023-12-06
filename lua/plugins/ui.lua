@@ -65,11 +65,56 @@ return {
         },
     },
     {
+        "kevinhwang91/nvim-hlslens",
+        lazy = false,
+        keys = {
+            {
+                "n",
+                mode = { "n" },
+                [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
+            },
+            {
+                "N",
+                mode = { "n" },
+                [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
+            },
+            {
+                "*",
+                mode = { "n" },
+                [[*<Cmd>lua require('hlslens').start()<CR>]],
+            },
+            {
+                "#",
+                mode = { "n" },
+                [[#<Cmd>lua require('hlslens').start()<CR>]],
+            },
+            {
+                "g*",
+                mode = { "n" },
+                [[g*<Cmd>lua require('hlslens').start()<CR>]],
+            },
+            {
+                "g#",
+                mode = { "n" },
+                [[g#<Cmd>lua require('hlslens').start()<CR>]],
+            },
+            {
+                "<BS>",
+                mode = { "n" },
+                "<Cmd>noh<CR>",
+            },
+        },
+    },
+    {
         "rcarriga/nvim-notify",
         event = "VeryLazy",
         dependencies = { "j-hui/fidget.nvim" },
         config = function()
             require("notify").notify = require("fidget").notify
         end,
+    },
+    {
+        "xiyaowong/transparent.nvim",
+        opts = {},
     },
 }

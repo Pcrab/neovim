@@ -9,6 +9,7 @@ vim.opt.relativenumber = true
 vim.opt.modelines = 1
 vim.opt.colorcolumn = "120"
 vim.opt.scrolloff = 10
+vim.opt.signcolumn = "yes"
 
 -- save file helper
 vim.api.nvim_create_user_command("SaveAsSudo", function()
@@ -18,7 +19,6 @@ end, {})
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.keymap.set("n", "<BS>", ":nohlsearch<CR>", { desc = "Clear search" })
 
 -- Clipboard
 vim.keymap.set("v", "<leader>y", '"+y', { desc = "Copy to system clipboard" })

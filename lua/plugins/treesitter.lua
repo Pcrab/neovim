@@ -3,7 +3,6 @@ return {
         "nvim-treesitter/nvim-treesitter",
         event = { "BufReadPost", "BufNewFile" },
         cmd = { "TSUpdate", "TSUpdateSync" },
-        dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
         build = ":TSUpdate",
         config = function()
             ---@diagnostic disable-next-line: missing-fields
@@ -25,10 +24,6 @@ return {
                             return false
                         end,
                     },
-                },
-                -- 'JoosepAlviste/nvim-ts-context-commentstring'
-                context_commentstring = {
-                    enable = true,
                 },
             })
         end,

@@ -45,6 +45,8 @@ return {
             "ray-x/lsp_signature.nvim",
             "hrsh7th/cmp-nvim-lsp",
             "b0o/schemastore.nvim",
+            "williamboman/mason.nvim",
+            "williamboman/mason-lspconfig.nvim",
             "folke/neoconf.nvim",
         },
     },

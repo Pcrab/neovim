@@ -29,7 +29,7 @@ lsp.buffer_keys = {
         end,
         "List workspace folder",
     },
-    type_def = { "<leader>D", vim.lsp.buf.type_definition, "Goto type definition" },
+    type_def = { "gD", vim.lsp.buf.type_definition, "Goto type definition" },
     rename = { "<leader>rn", vim.lsp.buf.rename, "Rename symbol" },
     code_action = {
         n = { "<leader>ca", vim.lsp.buf.code_action, "Code action" },
@@ -45,8 +45,6 @@ lsp.buffer_keys = {
     },
     codelens = { "<leader>cl", vim.lsp.codelens.run, "Code action" },
     list_ref = { "gr", vim.lsp.buf.references, "List references" },
-
-    -- format = { '<leader>f', vim.lsp.buf.formatting, 'Format buffer' },
 }
 
 function lsp.set_buffer_keymapping(_, bufnr)

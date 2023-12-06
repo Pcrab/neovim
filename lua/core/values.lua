@@ -1,6 +1,7 @@
 local values = {
     theme = {
-        name = "rose-pine",
+        name = "everforest",
+        -- name = "rose-pine",
         variant = "moon",
         ---@type table<string, string>
         palette = {},
