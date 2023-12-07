@@ -55,7 +55,7 @@ if vim.g.neovide then
         end
         return table.concat(font_names, ",")
     end
-    vim.g.neovide_transparency = 0.9
+    vim.g.neovide_transparency = 0.7
     vim.o.guifont = build_font({ "Maple Mono", "JetbrainsMono Nerd Font" })
 end
 

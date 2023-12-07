@@ -104,6 +104,7 @@ return {
                 "<Cmd>noh<CR>",
             },
         },
+        opts = {},
     },
     {
         "rcarriga/nvim-notify",
@@ -112,9 +113,5 @@ return {
         config = function()
             require("notify").notify = require("fidget").notify
         end,
-    },
-    {
-        "xiyaowong/transparent.nvim",
-        opts = {},
     },
 }

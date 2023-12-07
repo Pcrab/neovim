@@ -1,52 +1,62 @@
 local values = require("core.values")
-local lsp = require("core.lsp")
-local langs = require("core.langs")
 
 return {
     -- # load before nvim-lspconfig
     {
         "ray-x/lsp_signature.nvim",
-        lazy = true,
-        config = function()
-            lsp.on_attach_callbacks[#lsp.on_attach_callbacks + 1] = function(_, _)
-                require("lsp_signature").on_attach({ bind = true, handler_opts = { border = "none" } })
-            end
+        event = "VeryLazy",
+        opts = {
+            bind = true,
+            handler_opts = {
+                border = "single",
+            },
+        },
+        config = function(_, opts)
+            require("lsp_signature").setup(opts)
         end,
     },
     {
         "hrsh7th/cmp-nvim-lsp",
-        lazy = true,
-        config = function()
-            lsp.capabilities[#lsp.capabilities + 1] = require("cmp_nvim_lsp").default_capabilities
-        end,
+        event = "VeryLazy",
     },
     -- # nvim-lspconfig
     {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
         config = function()
-            local lspconfig = require("lspconfig")
-            lsp.make_config = function(server, on_attach, caps_maker)
-                local config = server.config or {}
-                if server.root_patterns then
-                    config.root_dir = require("lspconfig.util").root_pattern(unpack(server.root_patterns))
-                end
-                config.on_attach = lsp.on_attach(on_attach)
-                config.capabilities = lsp.make_capabilities(caps_maker)
-                return config
-            end
-            for name, srv in pairs(langs.servers) do
-                if srv.autoload then
-                    lspconfig[name].setup(lsp.make_config(srv))
-                end
-            end
+            require("core.lsp")
         end,
+        keys = {
+            {
+                "gd",
+                vim.lsp.buf.definition,
+                "n",
+                desc = "Goto definition",
+            },
+            { "gD", vim.lsp.buf.type_definition, "n", desc = "Goto type definition" },
+            { "K", vim.lsp.buf.hover, "n", desc = "Display hover information" },
+            {
+                "<C-k>",
+                function()
+                    require("lsp_signature").toggle_float_win()
+                end,
+                "n",
+                desc = "Display signature information",
+            },
+            { "<leader>ca", vim.lsp.codelens.run, "n", desc = "Code action" },
+            { "gr", vim.lsp.buf.references, "n", desc = "List references" },
+            { "[d", vim.diagnostic.goto_prev, "n", desc = "Go to previous diagnostic" },
+            { "]d", vim.diagnostic.goto_next, "n", desc = "Go to next diagnostic" },
+            { "<leader>rn", vim.lsp.buf.rename, "n", desc = "Rename" },
+            { "<leader>ld", vim.diagnostic.setloclist, "n", desc = "Set loclist" },
+        },
         dependencies = {
             "ray-x/lsp_signature.nvim",
             "hrsh7th/cmp-nvim-lsp",
             "b0o/schemastore.nvim",
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
+            "WhoIsSethDaniel/mason-tool-installer.nvim",
             "folke/neoconf.nvim",
         },
     },
@@ -88,13 +98,11 @@ return {
             })
         end,
     },
-    {
-        "kosayoda/nvim-lightbulb",
-        opts = {
-            sign = { enabled = false },
-            virtual_text = { enabled = true, text = "" },
-            autocmd = { enabled = true },
-            float = {},
-        },
-    },
+    -- {
+    --     "kosayoda/nvim-lightbulb",
+    --     opts = {
+    --         virtual_text = { enabled = true, text = "" },
+    --         autocmd = { enabled = true },
+    --     },
+    -- },
 }

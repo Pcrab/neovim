@@ -1,5 +1,3 @@
-local lsp = require("core.lsp")
-
 return {
     {
         "TimUntersberger/neogit",
@@ -50,29 +48,6 @@ return {
                     end
                 end,
             })
-            local lspconfig = require("lspconfig")
-            lspconfig.lua_ls.setup(lsp.make_config({
-                autoload = true,
-                config = {
-                    settings = {
-                        Lua = {
-                            format = { enable = false },
-                            runtime = {
-                                version = "LuaJIT",
-                            },
-                            diagnostics = {
-                                globals = { "vim" },
-                            },
-                            workspace = {
-                                checkThirdParty = false,
-                            },
-                            telemetry = {
-                                enable = false,
-                            },
-                        },
-                    },
-                },
-            }))
         end,
     },
     {
