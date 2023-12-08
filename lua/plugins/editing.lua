@@ -92,8 +92,7 @@ return {
                         -- Run formatters one after another instead of stopping at the first success
                         run_all_formatters = true,
                     },
-                    -- c = { "clang_format" },
-                    -- cpp = { "clang_format" },
+                    cs = { "csharpier" },
                     markdown = {},
                 },
                 format_on_save = function(bufnr)

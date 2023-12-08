@@ -4,6 +4,8 @@ require("mason-lspconfig").setup()
 require("mason-tool-installer").setup({
     ensure_installed = {
         "csharp_ls",
+        "omnisharp",
+        "csharpier",
         "lua_ls",
         "jsonls",
         "yamlls",
@@ -65,8 +67,14 @@ lspconfig.yamlls.setup({
     },
 })
 
-lspconfig.csharp_ls.setup({
+-- lspconfig.csharp_ls.setup({
+--     capabilities = capabilities,
+-- })
+lspconfig.omnisharp.setup({
     capabilities = capabilities,
+    handlers = {
+        ["textDocument/definition"] = require("omnisharp_extended").handler,
+    },
 })
 
 lspconfig.kotlin_language_server.setup({
