@@ -3,6 +3,7 @@ require("mason").setup()
 require("mason-lspconfig").setup()
 require("mason-tool-installer").setup({
     ensure_installed = {
+        "csharp_ls",
         "lua_ls",
         "jsonls",
         "yamlls",
@@ -10,6 +11,7 @@ require("mason-tool-installer").setup({
         "eslint_d",
         "prettierd",
         "rust-analyzer",
+        "kotlin_language_server",
     },
 })
 
@@ -48,6 +50,7 @@ lspconfig.jsonls.setup({
 })
 
 lspconfig.yamlls.setup({
+    capabilities = capabilities,
     settings = {
         yaml = {
             schemaStore = {
@@ -60,6 +63,14 @@ lspconfig.yamlls.setup({
             schemas = require("schemastore").yaml.schemas(),
         },
     },
+})
+
+lspconfig.csharp_ls.setup({
+    capabilities = capabilities,
+})
+
+lspconfig.kotlin_language_server.setup({
+    capabilities = capabilities,
 })
 
 require("typescript-tools").setup({

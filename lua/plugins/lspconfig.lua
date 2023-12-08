@@ -34,6 +34,7 @@ return {
                 desc = "Goto definition",
             },
             { "gD", vim.lsp.buf.type_definition, "n", desc = "Goto type definition" },
+            { "gi", vim.lsp.buf.implementation, "n", desc = "Goto implementation" },
             { "K", vim.lsp.buf.hover, "n", desc = "Display hover information" },
             {
                 "<C-k>",
@@ -43,12 +44,30 @@ return {
                 "n",
                 desc = "Display signature information",
             },
-            { "<leader>ca", vim.lsp.codelens.run, "n", desc = "Code action" },
             { "gr", vim.lsp.buf.references, "n", desc = "List references" },
             { "[d", vim.diagnostic.goto_prev, "n", desc = "Go to previous diagnostic" },
             { "]d", vim.diagnostic.goto_next, "n", desc = "Go to next diagnostic" },
+            { "<leader>d", vim.diagnostic.setloclist, "n", desc = "Set loclist" },
+            { "<leader>aa", vim.diagnostic.setqflist, "n", desc = "Show all workspace diagnostics" },
+            {
+                "<leader>ae",
+                function()
+                    vim.diagnostic.setqflist({ severity = "E" })
+                end,
+                "n",
+                desc = "Show all workspace errors",
+            },
+            {
+                "<leader>aw",
+                function()
+                    vim.diagnostic.setqflist({ severity = "W" })
+                end,
+                "n",
+                desc = "Show all workspace warnings",
+            },
+
+            { "<leader>ca", vim.lsp.codelens.run, "n", desc = "Code action" },
             { "<leader>rn", vim.lsp.buf.rename, "n", desc = "Rename" },
-            { "<leader>ld", vim.diagnostic.setloclist, "n", desc = "Set loclist" },
         },
         dependencies = {
             "ray-x/lsp_signature.nvim",

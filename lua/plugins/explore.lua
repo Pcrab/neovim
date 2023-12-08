@@ -31,4 +31,19 @@ return {
         opts = {},
         dependencies = { "nvim-tree/nvim-web-devicons" },
     },
+    {
+        "chrisgrieser/nvim-spider",
+        keys = {
+            {
+                "e",
+                [[<cmd>lua require("spider").motion("e")<CR>]],
+                mode = { "n", "o", "x" },
+            },
+            {
+                "w",
+                [[<cmd>lua require("spider").motion("w")<CR>]],
+                mode = { "n", "o", "x" },
+            },
+        },
+    },
 }
