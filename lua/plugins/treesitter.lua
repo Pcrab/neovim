@@ -4,36 +4,14 @@ return {
         event = { "BufReadPost", "BufNewFile" },
         cmd = { "TSUpdate", "TSUpdateSync" },
         build = ":TSUpdate",
+        dependencies = {
+            "windwp/nvim-ts-autotag",
+            "nvim-treesitter/nvim-treesitter-textobjects",
+        },
         config = function()
             ---@diagnostic disable-next-line: missing-fields
             require("nvim-treesitter.configs").setup({
                 ensure_installed = "all",
-                highlight = {
-                    enable = true,
-                    highlight = {
-                        enable = true,
-                        disable = function(lang, bufnr)
-                            if lang == "html" and vim.api.nvim_buf_line_count(bufnr) > 500 then
-                                return true
-                            end
-                            for _, line in ipairs(vim.api.nvim_buf_get_lines(0, 0, 3, false)) do
-                                if #line > 500 then
-                                    return true
-                                end
-                            end
-                            return false
-                        end,
-                    },
-                },
-            })
-        end,
-    },
-    {
-        "nvim-treesitter/nvim-treesitter-textobjects",
-        event = { "BufReadPost", "BufNewFile" },
-        dependencies = { "nvim-treesitter/nvim-treesitter" },
-        config = function()
-            require("nvim-treesitter.configs").setup({
                 textobjects = {
                     select = {
                         enable = true,
@@ -70,6 +48,29 @@ return {
                             ["[C"] = "@class.outer",
                         },
                     },
+                },
+                highlight = {
+                    enable = true,
+                    highlight = {
+                        enable = true,
+                        disable = function(lang, bufnr)
+                            if lang == "html" and vim.api.nvim_buf_line_count(bufnr) > 500 then
+                                return true
+                            end
+                            for _, line in ipairs(vim.api.nvim_buf_get_lines(0, 0, 3, false)) do
+                                if #line > 500 then
+                                    return true
+                                end
+                            end
+                            return false
+                        end,
+                    },
+                },
+                autotag = {
+                    enable = true,
+                    enable_rename = true,
+                    enable_close = true,
+                    enable_close_on_slash = true,
                 },
             })
         end,

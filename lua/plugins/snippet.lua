@@ -1,27 +1,42 @@
-local function config()
-    local ls = require("luasnip")
-    ls.setup({
-        updateevents = { "TextChanged", "TextChangedI" },
-    })
-    vim.keymap.set({ "i", "s" }, "<C-j>", function()
-        if ls.expand_or_jumpable() then
-            ls.expand_or_jump()
-        end
-    end, { desc = "expand snippet or jump to next node" })
-    vim.keymap.set({ "i", "s" }, "<C-k>", function()
-        if ls.jumpable(-1) then
-            ls.jump(-1)
-        end
-    end, { desc = "jump to preview node" })
-    vim.keymap.set({ "i", "s" }, "<C-l>", function()
-        if ls.choice_active() then
-            ls.change_choice(1)
-        end
-    end)
-end
-
 return {
     "L3MON4D3/LuaSnip",
-    config = config,
+    keys = {
+        {
+            "<C-j>",
+            mode = { "i", "s" },
+            function()
+                if require("luasnip").expand_or_jumpable() then
+                    require("luasnip").expand_or_jump()
+                end
+            end,
+        },
+        {
+            "<C-k>",
+            mode = { "i", "s" },
+            function()
+                if require("luasnip").jumpable(-1) then
+                    require("luasnip").jump(-1)
+                end
+            end,
+        },
+        {
+            "<C-l>",
+            mode = { "i", "s" },
+            function()
+                if require("luasnip").choice_active() then
+                    require("luasnip").change_choice(1)
+                end
+            end,
+        },
+    },
+    config = function()
+        require("luasnip").setup({
+            updateevents = { "TextChanged", "TextChangedI" },
+        })
+        require("luasnip.loaders.from_vscode").lazy_load()
+    end,
     event = "InsertEnter",
+    dependencies = {
+        "rafamadriz/friendly-snippets",
+    },
 }

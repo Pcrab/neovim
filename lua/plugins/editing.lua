@@ -125,4 +125,8 @@ return {
             }
         end,
     },
+    {
+        "nguyenvukhang/nvim-toggler",
+        opts = {},
+    },
 }
