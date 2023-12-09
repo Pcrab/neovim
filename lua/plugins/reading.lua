@@ -15,51 +15,65 @@ return {
     },
     -- highlight color value
     { "norcalli/nvim-colorizer.lua", cmd = "ColorizerToggle" },
-    -- jump
     {
-        "smoka7/hop.nvim",
-        version = "*",
+        "folke/flash.nvim",
+        event = "VeryLazy",
         opts = {},
         keys = {
             {
-                "f",
-                mode = { "n", "x" },
+                "s",
+                mode = { "n", "x", "o" },
                 function()
-                    local directions = require("hop.hint").HintDirection
-                    require("hop").hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true })
+                    require("flash").jump()
                 end,
+                desc = "Flash",
             },
             {
-                "F",
-                mode = { "n", "x" },
+                "S",
+                mode = { "n", "x", "o" },
                 function()
-                    local directions = require("hop.hint").HintDirection
-                    require("hop").hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true })
+                    require("flash").treesitter()
                 end,
+                desc = "Flash Treesitter",
             },
             {
-                "t",
-                mode = { "n", "x" },
+                "r",
+                mode = "o",
                 function()
-                    local directions = require("hop.hint").HintDirection
-                    require("hop").hint_char1({
-                        direction = directions.AFTER_CURSOR,
-                        current_line_only = true,
-                        hint_offset = -1,
-                    })
+                    require("flash").remote()
                 end,
+                desc = "Remote Flash",
             },
             {
-                "T",
-                mode = { "n", "x" },
+                "R",
+                mode = { "o", "x" },
                 function()
-                    local directions = require("hop.hint").HintDirection
-                    require("hop").hint_char1({
-                        direction = directions.BEFORE_CURSOR,
-                        current_line_only = true,
-                        hint_offset = 1,
-                    })
+                    require("flash").treesitter_search()
                 end,
+                desc = "Treesitter Search",
+            },
+            {
+                "<c-s>",
+                mode = { "c" },
+                function()
+                    require("flash").toggle()
+                end,
+                desc = "Toggle Flash Search",
+            },
+        },
+    },
+    {
+        "chrisgrieser/nvim-spider",
+        keys = {
+            {
+                "e",
+                [[<cmd>lua require("spider").motion("e")<CR>]],
+                mode = { "n", "o", "x" },
+            },
+            {
+                "w",
+                [[<cmd>lua require("spider").motion("w")<CR>]],
+                mode = { "n", "o", "x" },
             },
         },
     },

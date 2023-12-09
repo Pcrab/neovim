@@ -12,8 +12,11 @@ require("mason-tool-installer").setup({
         "stylua",
         "eslint_d",
         "prettierd",
+        "astro",
+        "svelte",
         "rust-analyzer",
-        "kotlin_language_server",
+        "tsserver",
+        -- "kotlin_language_server",
     },
 })
 
@@ -77,9 +80,19 @@ lspconfig.omnisharp.setup({
     },
 })
 
-lspconfig.kotlin_language_server.setup({
+lspconfig.astro.setup({
     capabilities = capabilities,
 })
+lspconfig.svelte.setup({
+    capabilities = capabilities,
+})
+lspconfig.unocss.setup({
+    capabilities = capabilities,
+})
+
+-- lspconfig.kotlin_language_server.setup({
+--     capabilities = capabilities,
+-- })
 
 require("typescript-tools").setup({
     handlers = {

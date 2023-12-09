@@ -5,10 +5,60 @@ return {
         dependencies = {
             { "nvim-lua/plenary.nvim" },
             { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-            "rmagatti/auto-session",
+            { "nvim-telescope/telescope-file-browser.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
+            { "nvim-telescope/telescope-ui-select.nvim" },
+        },
+        keys = {
+            {
+                "<leader>ff",
+                mode = { "n" },
+                function()
+                    require("telescope.builtin").find_files()
+                end,
+                desc = "Find files",
+            },
+            {
+                "<leader>fg",
+                mode = { "n" },
+                function()
+                    require("telescope.builtin").live_grep()
+                end,
+                desc = "Live grep",
+            },
+            {
+                "<leader>fb",
+                mode = { "n" },
+                function()
+                    require("telescope.builtin").buffers()
+                end,
+                desc = "Find buffer",
+            },
+            {
+                "<leader>fh",
+                mode = { "n" },
+                function()
+                    require("telescope.builtin").help_tags()
+                end,
+                desc = "Find help",
+            },
+            {
+                "<leader>fy",
+                mode = { "n" },
+                function()
+                    require("telescope.builtin").lsp_workspace_symbols()
+                end,
+                desc = "Find lsp symbols",
+            },
+            {
+                "<leader>fb",
+                mode = { "n" },
+                function()
+                    require("telescope").extensions.file_browser.file_browser()
+                end,
+                desc = "Find session",
+            },
         },
         config = function()
-            require("telescope").load_extension("fzf")
             require("telescope").setup({
                 defaults = {
                     preview = {
@@ -23,26 +73,37 @@ return {
                         override_file_sorter = true,
                         case_mode = "smart_case", -- or "ignore_case" or "respect_case"
                     },
+                    file_browser = {
+                        -- disables netrw and use telescope-file-browser in its place
+                        hijack_netrw = true,
+                    },
+                    ["ui-select"] = {
+                        require("telescope.themes").get_dropdown({
+                            -- even more opts
+                        }),
+                    },
                 },
             })
-            vim.keymap.set("n", "<leader>ff", require("telescope.builtin").find_files, { desc = "Find files" })
-            vim.keymap.set("n", "<leader>fg", require("telescope.builtin").live_grep, { desc = "Grep in files" })
-            vim.keymap.set("n", "<leader>fb", require("telescope.builtin").buffers, { desc = "Find buffer" })
-            vim.keymap.set("n", "<leader>fh", require("telescope.builtin").help_tags, { desc = "Find help" })
-            vim.keymap.set("n", "<leader>fm", require("telescope.builtin").marks, { desc = "Find mark" })
-            vim.keymap.set(
-                "n",
-                "<leader>fy",
-                require("telescope.builtin").lsp_workspace_symbols,
-                { desc = "Find lsp symbol" }
-            )
-            require("auto-session").setup_session_lens()
-            vim.keymap.set(
-                "n",
-                "<leader>fs",
-                require("auto-session.session-lens").search_session,
-                { desc = "Find session", noremap = true }
-            )
+
+            require("telescope").load_extension("fzf")
+            require("telescope").load_extension("file_browser")
+            require("telescope").load_extension("ui-select")
         end,
+    },
+    {
+        "wintermute-cell/gitignore.nvim",
+        dependencies = {
+            "nvim-telescope/telescope.nvim",
+        },
+        keys = {
+            {
+                "<leader>gi",
+                mode = { "n" },
+                function()
+                    require("gitignore").generate(".")
+                end,
+                desc = "Generate gitignore file",
+            },
+        },
     },
 }

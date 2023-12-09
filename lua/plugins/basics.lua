@@ -11,24 +11,35 @@ return {
         end,
     },
     {
-        "rmagatti/auto-session",
-        config = function()
-            vim.opt.sessionoptions = "curdir,folds,globals,help,tabpages,terminal,winsize"
-            require("auto-session").setup({
-                auto_session_suppress_dirs = { "~" },
-                session_lens = {
-                    load_on_setup = false,
-                },
-            })
-            vim.keymap.set("n", "<leader>sr", "<cmd>SessionRestore<cr>", { desc = "Restore session" })
-            vim.keymap.set("n", "<leader>ss", "<cmd>SessionSave<cr>", { desc = "Save session" })
-        end,
-    },
-    {
         "folke/neoconf.nvim",
         priority = 0,
         lazy = false,
         opts = {},
     },
     { "wakatime/vim-wakatime" },
+    {
+        "folke/persistence.nvim",
+        opts = {},
+        event = "BufReadPre",
+        keys = {
+            {
+                "<leader>qs",
+                mode = "n",
+                function()
+                    require("persistence").load()
+                end,
+                desc = "Load session",
+            },
+        },
+    },
+    {
+        "nvimdev/dashboard-nvim",
+        event = "VimEnter",
+        config = function()
+            require("dashboard").setup({
+                -- config
+            })
+        end,
+        dependencies = { { "nvim-tree/nvim-web-devicons" } },
+    },
 }
