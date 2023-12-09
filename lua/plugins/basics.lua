@@ -23,7 +23,7 @@ return {
         event = "BufReadPre",
         keys = {
             {
-                "<leader>qs",
+                "<leader>s",
                 mode = "n",
                 function()
                     require("persistence").load()

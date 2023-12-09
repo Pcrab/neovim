@@ -114,4 +114,17 @@ return {
             require("notify").notify = require("fidget").notify
         end,
     },
+    {
+        "folke/zen-mode.nvim",
+        opts = {},
+        keys = {
+            {
+                "<leader>z",
+                mode = "n",
+                function()
+                    require("zen-mode").toggle()
+                end,
+            },
+        },
+    },
 }
