@@ -43,10 +43,14 @@ return {
                 showImplicitArguments = true,
             }
             config.on_attach = function(client, bufnr)
-                -- require("metals").setup_dap()
+                require("metals").setup_dap()
 
                 vim.keymap.set("n", "<leader>ws", function()
                     require("metals").hover_worksheet()
+                end)
+
+                vim.keymap.set("n", "<leader>fs", function()
+                    require("telescope").extensions.metals.commands()
                 end)
             end
             local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
