@@ -57,6 +57,12 @@ if vim.g.neovide then
     end
     vim.g.neovide_transparency = 0.7
     vim.o.guifont = build_font({ "Maple Mono", "JetbrainsMono Nerd Font" })
+
+    vim.keymap.set("n", "<D-s>", ":w<CR>") -- Save
+    vim.keymap.set("v", "<D-c>", '"+y') -- Copy
+    vim.keymap.set("n", "<D-v>", '"+P') -- Paste normal mode
+    vim.keymap.set("v", "<D-v>", '"+P') -- Paste visual mode
+    vim.keymap.set("c", "<D-v>", "<C-R>+") -- Paste command mode
 end
 
 -- Quickfix

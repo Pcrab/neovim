@@ -36,14 +36,6 @@ return {
             { "gD", vim.lsp.buf.type_definition, "n", desc = "Goto type definition" },
             { "gi", vim.lsp.buf.implementation, "n", desc = "Goto implementation" },
             { "K", vim.lsp.buf.hover, "n", desc = "Display hover information" },
-            {
-                "<C-k>",
-                function()
-                    require("lsp_signature").toggle_float_win()
-                end,
-                "n",
-                desc = "Display signature information",
-            },
             { "gr", vim.lsp.buf.references, "n", desc = "List references" },
             { "[d", vim.diagnostic.goto_prev, "n", desc = "Go to previous diagnostic" },
             { "]d", vim.diagnostic.goto_next, "n", desc = "Go to next diagnostic" },

@@ -32,16 +32,16 @@ return {
             },
         },
     },
-    {
-        "nvimdev/dashboard-nvim",
-        event = "VimEnter",
-        config = function()
-            require("dashboard").setup({
-                -- config
-            })
-        end,
-        dependencies = { { "nvim-tree/nvim-web-devicons" } },
-    },
+    -- {
+    --     "nvimdev/dashboard-nvim",
+    --     event = "VimEnter",
+    --     config = function()
+    --         require("dashboard").setup({
+    --             theme = "doom",
+    --         })
+    --     end,
+    --     dependencies = { { "nvim-tree/nvim-web-devicons" } },
+    -- },
     -- {
     --     "m4xshen/hardtime.nvim",
     --     dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
