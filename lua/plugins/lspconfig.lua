@@ -58,7 +58,7 @@ return {
                 desc = "Show all workspace warnings",
             },
 
-            { "<leader>ca", vim.lsp.codelens.run, "n", desc = "Code action" },
+            { "<leader>ca", vim.lsp.buf.code_action, "n", desc = "Code action" },
             { "<leader>rn", vim.lsp.buf.rename, "n", desc = "Rename" },
         },
         dependencies = {
@@ -71,6 +71,7 @@ return {
             "folke/neoconf.nvim",
 
             "Hoffs/omnisharp-extended-lsp.nvim",
+            "kevinhwang91/nvim-ufo",
         },
     },
     -- # load after nvim-lspconfig

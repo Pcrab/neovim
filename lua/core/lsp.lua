@@ -4,6 +4,8 @@ require("mason-lspconfig").setup()
 require("mason-tool-installer").setup({
     ensure_installed = {
         "csharp_ls",
+        "fsautocomplete",
+        "fantomas",
         "omnisharp",
         "csharpier",
         "lua_ls",
@@ -16,11 +18,16 @@ require("mason-tool-installer").setup({
         "svelte",
         "rust-analyzer",
         "tsserver",
+        "prismals",
         -- "kotlin_language_server",
     },
 })
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
+capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true,
+}
 
 local lspconfig = require("lspconfig")
 lspconfig.lua_ls.setup({
@@ -87,6 +94,9 @@ lspconfig.svelte.setup({
     capabilities = capabilities,
 })
 lspconfig.unocss.setup({
+    capabilities = capabilities,
+})
+lspconfig.prismals.setup({
     capabilities = capabilities,
 })
 

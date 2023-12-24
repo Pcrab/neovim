@@ -7,6 +7,8 @@ return {
         dependencies = {
             "windwp/nvim-ts-autotag",
             "nvim-treesitter/nvim-treesitter-textobjects",
+
+            "kevinhwang91/nvim-ufo",
         },
         config = function()
             ---@diagnostic disable-next-line: missing-fields

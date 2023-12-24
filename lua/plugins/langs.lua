@@ -63,4 +63,29 @@ return {
             })
         end,
     },
+    {
+        "tpope/vim-dadbod",
+        dependencies = {
+            "kristijanhusak/vim-dadbod-ui",
+            "kristijanhusak/vim-dadbod-completion",
+        },
+    },
+    {
+        "rest-nvim/rest.nvim",
+        ft = { "http" },
+        dependencies = { { "nvim-lua/plenary.nvim" } },
+        opts = {},
+        keys = {
+            {
+                "<leader>rr",
+                [[<Plug>RestNvim]],
+                { mode = { "n" }, noremap = true, silent = true },
+            },
+            {
+                "<leader>rl",
+                [[<Plug>RestNvimLast]],
+                { noremap = true, silent = true },
+            },
+        },
+    },
 }
