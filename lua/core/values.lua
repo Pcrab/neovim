@@ -1,6 +1,6 @@
 local values = {
     theme = {
-        name = "everforest",
+        name = "modus-themes",
         -- name = "rose-pine",
         variant = "moon",
         ---@type table<string, string>

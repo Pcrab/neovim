@@ -33,4 +33,15 @@ return {
             vim.cmd.colorscheme("rose-pine")
         end,
     },
+    {
+        "miikanissi/modus-themes.nvim",
+        enabled = values.theme.name == "modus-themes",
+        priority = 1000,
+        opts = {
+            transparent = true,
+        },
+        config = function()
+            vim.cmd.colorscheme("modus")
+        end,
+    },
 }
