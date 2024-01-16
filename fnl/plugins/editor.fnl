@@ -58,5 +58,6 @@
           (set vim.o.foldcolumn :1)
           (set vim.o.foldlevel 99)
           (set vim.o.foldlevelstart 99)
-          (set vim.o.foldenable true))}]
+          (set vim.o.foldenable true))}
+ {1 :kylechui/nvim-surround :version "*" :event :VeryLazy :opts {}}]
 
