@@ -28,6 +28,10 @@
           2 vim.lsp.buf.signature_help
           :mode :n
           :desc "Display hover information"}
+         {1 :gh
+          2 vim.lsp.buf.signature_help
+          :mode :n
+          :desc "Display hover information"}
          {1 :gr 2 vim.lsp.buf.references :mode :n :desc "List references"}
          {1 "[d"
           2 vim.diagnostic.goto_prev

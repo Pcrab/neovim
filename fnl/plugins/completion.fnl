@@ -7,8 +7,7 @@
                  :hrsh7th/cmp-path
                  :hrsh7th/cmp-cmdline
                  :L3MON4D3/LuaSnip
-                 :saadparwaiz1/cmp_luasnip
-                 :PaterJason/cmp-conjure]
+                 :saadparwaiz1/cmp_luasnip]
   :config (fn []
             (let [cmp (require :cmp)
                   luasnip (require :luasnip)]
@@ -21,8 +20,7 @@
                                                         [:i :c])
                                     :<CR> (cmp.mapping.confirm {:select true})}
                           :sources (cmp.config.sources [{:name :nvim_lsp}
-                                                        {:name :luasnip}
-                                                        {:name :conjure}]
+                                                        {:name :luasnip}]
                                                        [{:name :buffer}
                                                         {:name :path}])})
               (cmp.setup.cmdline ":"

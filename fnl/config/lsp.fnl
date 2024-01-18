@@ -36,3 +36,5 @@
 
 (setup :clojure_lsp {: capabilities})
 
+(setup :racket_langserver {: capabilities})
+
