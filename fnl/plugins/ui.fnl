@@ -1,10 +1,6 @@
 [{1 :stevearc/dressing.nvim
   :event :VeryLazy
-  :opts {:input {:win_options {:winblend 0}}
-         :select {:get_config (fn [opts]
-                                (if (= (:kind opts) :codeaction)
-                                    {:backend :builtin
-                                     :builtin {:relative :cursor :max_width 80}}))}}}
+  :opts {:input {:win_options {:winblend 0}}}}
  {1 :kevinhwang91/nvim-bqf :ft :qf}
  {1 :lewis6991/gitsigns.nvim
   :opts {:signs {:add {:text "│"}

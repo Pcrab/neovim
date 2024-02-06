@@ -59,6 +59,7 @@
               (vim.diagnostic.setqflist {:severity :W}))
           :mode :n
           :desc "Show all workspace warnings"}
+         {1 :<leader>cl 2 vim.lsp.codelens.run :mode :n :desc "Apply codelens"}
          {1 :<leader>ca 2 vim.lsp.buf.code_action :mode :n :desc "Code action"}
          {1 :<leader>rn 2 vim.lsp.buf.rename :mode :n :desc :Rename}]}
  {1 :j-hui/fidget.nvim

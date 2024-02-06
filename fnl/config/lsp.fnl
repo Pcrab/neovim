@@ -4,7 +4,6 @@
                                                                 :fennel_language_server
                                                                 :jsonls
                                                                 :yamlls
-                                                                :clojure_lsp
                                                                 :stylua]})
 
 (local capabilities ((. (require :cmp_nvim_lsp) :default_capabilities)))
@@ -34,7 +33,5 @@
                                   :schemas ((. (. (require :schemastore) :yaml)
                                                :schemas))}}})
 
-(setup :clojure_lsp {: capabilities})
-
-(setup :racket_langserver {: capabilities})
+(setup :ocamllsp {: capabilities})
 

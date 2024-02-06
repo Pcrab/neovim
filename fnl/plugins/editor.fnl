@@ -25,6 +25,7 @@
   :event [:BufWritePre]
   :opts {:formatters_by_ft {:lua [:stylua]
                             :fennel [:fnlfmt]
+                            :haskell [:fourmolu]
                             :javascript [:eslint_d
                                          :eslint
                                          :prettierd
