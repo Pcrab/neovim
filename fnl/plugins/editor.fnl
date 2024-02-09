@@ -34,6 +34,7 @@
                                          :eslint
                                          :prettierd
                                          :prettier]
+                            :ocaml [:ocamlformat]
                             :python {:formatters [:isort :black]
                                      :run_all_formatters true}
                             :cs [:csharpier]
@@ -60,5 +61,16 @@
           (set vim.o.foldlevel 99)
           (set vim.o.foldlevelstart 99)
           (set vim.o.foldenable true))}
+ {1 :nvim-pack/nvim-spectre
+  :keys [{1 :<leader>S :mode :n 2 "<CMD>lua require(\"spectre\").toggle()<CR>"}
+         {1 :<leader>sw
+          :mode :n
+          2 "<CMD>lua require(\"spectre\").open_visual({select_word=true})<CR>"}
+         {1 :<leader>sw
+          :mode :v
+          2 "<ESC><CMD>lua require(\"spectre\").open_visual()<CR>"}
+         {1 :<leader>sp
+          :mode :n
+          2 "<ESC><CMD>lua require(\"spectre\").open_file_search({select_word=true})<CR>"}]}
  {1 :kylechui/nvim-surround :version "*" :event :VeryLazy :opts {}}]
 
