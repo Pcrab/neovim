@@ -1,6 +1,4 @@
-[{1 :stevearc/dressing.nvim
-  :event :VeryLazy
-  :opts {:input {:win_options {:winblend 0}}}}
+[{1 :stevearc/dressing.nvim :event :VeryLazy :opts {}}
  {1 :kevinhwang91/nvim-bqf :ft :qf}
  {1 :lewis6991/gitsigns.nvim
   :opts {:signs {:add {:text "│"}

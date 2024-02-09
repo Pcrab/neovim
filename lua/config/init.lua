@@ -14,5 +14,9 @@ if (vim.fn.has("wsl") == 1) then
   vim.g.clipboard = {name = "WslClipboard", copy = {["+"] = "clip.exe", ["*"] = "clip.exe"}, paste = {["+"] = "powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace(\"`r\", \"\"))", ["*"] = "powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace(\"`r\", \"\"))"}, cache_enabled = 0}
 else
 end
+local function _3_()
+  return vim.highlight.on_yank({timeout = 200, visual = true})
+end
+vim.api.nvim_create_autocmd("TextYankPost", {group = vim.api.nvim_create_augroup("highlight_yank", {clear = true}), pattern = "*", desc = "Highlight selection on yank", callback = _3_})
 require("config.keymaps")
 return {}
