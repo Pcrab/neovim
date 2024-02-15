@@ -24,10 +24,7 @@
           2 vim.lsp.buf.implementation
           :mode :n
           :desc "Goto implementation"}
-         {1 :K
-          2 vim.lsp.buf.signature_help
-          :mode :n
-          :desc "Display hover information"}
+         {1 :K 2 vim.lsp.buf.hover :mode :n :desc "Display hover information"}
          {1 :gh
           2 vim.lsp.buf.signature_help
           :mode :n
