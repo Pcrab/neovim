@@ -26,13 +26,6 @@
   (each [option value (pairs options)]
     (core.assoc nvim.o option value)))
 
-(if (= (vim.fn.has :wsl) 1)
-    (set vim.g.clipboard {:name :WslClipboard
-                          :copy {:+ :clip.exe :* :clip.exe}
-                          :paste {:+ "powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace(\"`r\", \"\"))"
-                                  :* "powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace(\"`r\", \"\"))"}
-                          :cache_enabled 0}))
-
 (vim.api.nvim_create_autocmd :TextYankPost
                              {:group (vim.api.nvim_create_augroup :highlight_yank
                                                                   {:clear true})

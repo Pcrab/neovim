@@ -21,4 +21,6 @@ local function _3_(args)
   local bufnr = args.buf
   return vim.keymap.set("n", "q", "<CMD>cclose<CR>", {buffer = bufnr})
 end
-return vim.api.nvim_create_autocmd("Filetype", {group = filetype_keymaps, pattern = "qf", callback = _3_})
+vim.api.nvim_create_autocmd("Filetype", {group = filetype_keymaps, pattern = "qf", callback = _3_})
+vim.keymap.set("n", "gf", "<C-w>f", {desc = "Open file under cursor in split"})
+return vim.keymap.set("v", "gf", "<C-w>f", {desc = "Open file under cursor in split"})

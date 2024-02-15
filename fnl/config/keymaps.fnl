@@ -24,3 +24,6 @@
                                                             :<CMD>cclose<CR>
                                                             {:buffer bufnr})))})
 
+(vim.keymap.set :n :gf :<C-w>f {:desc "Open file under cursor in split"})
+(vim.keymap.set :v :gf :<C-w>f {:desc "Open file under cursor in split"})
+

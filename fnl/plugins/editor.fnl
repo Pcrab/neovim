@@ -13,10 +13,25 @@
               (comment-nvim.setup {:pre_hook (commentstring.create_pre_hook)})))}
  {1 :akinsho/toggleterm.nvim
   :version "*"
-  :opts {:open_mapping :<c-t> :direction :float}}
- {1 :akinsho/toggleterm.nvim
-  :version "*"
-  :opts {:open_mapping :<c-t> :direction :float}}
+  :opts {:size (fn [term]
+                 (if (= term.direction :horizontal) 15
+                     (= term.direction :vertical) (* 0.4 vim.o.columns)))
+         :open_mapping "<C-\\>"
+         :on_create (fn [t]
+                      (vim.keymap.set :t :<ESC> "<C-\\><C-N>" {:buffer t.bufnr}))
+         :winbar {:enabled true}}
+  :keys (fn []
+          (let [lf (: (. (require :toggleterm.terminal) :Terminal) :new
+                      {:cmd :lf :hidden true :direction :float})]
+            [{1 "<C-\\>"}
+             {1 :<leader>tt
+              :mode :n
+              2 :<CMD>ToggleTermToggleAll<CR>
+              :desc "All terminal"}
+             {1 :<leader>n
+              2 (fn []
+                  (: lf :toggle))
+              :desc "Toggle File Navigator"}]))}
  {1 :stevearc/conform.nvim
   :dependencies [:mfussenegger/nvim-lint]
   :init (fn []
@@ -72,5 +87,9 @@
          {1 :<leader>sp
           :mode :n
           2 "<ESC><CMD>lua require(\"spectre\").open_file_search({select_word=true})<CR>"}]}
- {1 :kylechui/nvim-surround :version "*" :event :VeryLazy :opts {}}]
+ {1 :kylechui/nvim-surround :version "*" :event :VeryLazy :opts {}}
+ {1 :willothy/flatten.nvim
+  :opts {:nest_if_no_args true :window {:open :alternate}}
+  :lazy false
+  :priority 1001}]
 
