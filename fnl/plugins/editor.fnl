@@ -17,6 +17,7 @@
                  (if (= term.direction :horizontal) 15
                      (= term.direction :vertical) (* 0.4 vim.o.columns)))
          :open_mapping "<C-\\>"
+         :direction :float
          :on_create (fn [t]
                       (vim.keymap.set :t :<ESC> "<C-\\><C-N>" {:buffer t.bufnr}))
          :winbar {:enabled true}}
@@ -63,6 +64,7 @@
                     :typescript [:eslint_d]
                     :javascriptreact [:eslint_d]
                     :typescriptreact [:eslint_d]
+                    :haskell [:hlint]
                     :fennel [:fennel]})
               (vim.api.nvim_create_autocmd [:BufWritePost]
                                            {:callback (fn []

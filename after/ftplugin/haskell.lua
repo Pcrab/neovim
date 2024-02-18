@@ -1,4 +1,3 @@
--- ~/.config/nvim/after/ftplugin/haskell.lua
 local ht = require("haskell-tools")
 
 ht.lsp.start()

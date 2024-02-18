@@ -1,3 +1,6 @@
+(fn ts [name]
+  (.. "<CMD>Telescope " name :<CR>))
+
 [{1 :ray-x/lsp_signature.nvim
   :event :VeryLazy
   :opts {:bind true :handler_opts {:border :single}}}
@@ -15,13 +18,13 @@
                  :kevinhwang91/nvim-ufo]
   :config (fn []
             (require :config.lsp))
-  :keys [{1 :gd 2 vim.lsp.buf.definition :mode :n :desc "Goto definition"}
+  :keys [{1 :gd 2 (ts :lsp_definitions) :mode :n :desc "Goto definition"}
          {1 :gD
-          2 vim.lsp.buf.type_definition
+          2 (ts :lsp_type_definitions)
           :mode :n
           :desc "Goto type definition"}
          {1 :gi
-          2 vim.lsp.buf.implementation
+          2 (ts :lsp_implementations)
           :mode :n
           :desc "Goto implementation"}
          {1 :K 2 vim.lsp.buf.hover :mode :n :desc "Display hover information"}
@@ -29,7 +32,7 @@
           2 vim.lsp.buf.signature_help
           :mode :n
           :desc "Display hover information"}
-         {1 :gr 2 vim.lsp.buf.references :mode :n :desc "List references"}
+         {1 :gr 2 (ts :lsp_references) :mode :n :desc "List references"}
          {1 "[d"
           2 vim.diagnostic.goto_prev
           :mode :n
@@ -43,19 +46,13 @@
           :mode :n
           :desc "Set loclist"}
          {1 :<leader>aa
-          2 vim.diagnostic.setqflist
+          2 (ts :diagnostics)
           :mode :n
           :desc "Show all workspace diagnostics"}
-         {1 :<leader>ae
-          2 (fn []
-              (vim.diagnostic.setqflist {:severity :E}))
+         {1 :<leader>D
+          2 vim.diagnostic.open_float
           :mode :n
-          :desc "Show all workspace errors"}
-         {1 :<leader>aw
-          2 (fn []
-              (vim.diagnostic.setqflist {:severity :W}))
-          :mode :n
-          :desc "Show all workspace warnings"}
+          :desc "Open diagnostic message of current line"}
          {1 :<leader>cl 2 vim.lsp.codelens.run :mode :n :desc "Apply codelens"}
          {1 :<leader>ca 2 vim.lsp.buf.code_action :mode :n :desc "Code action"}
          {1 :<leader>rn 2 vim.lsp.buf.rename :mode :n :desc :Rename}]}
