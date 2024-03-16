@@ -34,4 +34,5 @@
                                                :schemas))}}})
 
 (setup :ocamllsp {: capabilities})
+(setup :zls {: capabilities})
 

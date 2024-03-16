@@ -12,4 +12,5 @@ setup("lua_ls", {capabilities = capabilities, settings = {Lua = {format = {enabl
 setup("fennel_language_server", {capabilities = capabilities, settings = {fennel = {diagnostics = {globals = {"vim"}}}}})
 setup("jsonls", {capabilities = capabilities, settings = {json = {schemas = ((require("schemastore")).json).schemas(), validate = {enable = true}}}})
 setup("yamlls", {capabilities = capabilities, settings = {yaml = {schemaStore = {url = "", enable = false}, schemas = ((require("schemastore")).yaml).schemas()}}})
-return setup("ocamllsp", {capabilities = capabilities})
+setup("ocamllsp", {capabilities = capabilities})
+return setup("zls", {capabilities = capabilities})
