@@ -11,6 +11,7 @@ return {
                 biome = {},
                 ts_ls = {},
                 koka = {},
+                metals = {},
             },
         },
         config = function(_, opts)
