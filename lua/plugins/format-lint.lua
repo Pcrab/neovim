@@ -7,6 +7,10 @@ return {
             formatters_by_ft = {
                 lua = { 'stylua' },
                 json = { 'biome' },
+                javascript = { 'biome' },
+                typescript = { 'biome' },
+                javascriptreact = { 'biome' },
+                typescriptreact = { 'biome' },
             },
             default_format_opts = {
                 lsp_format = 'fallback',
