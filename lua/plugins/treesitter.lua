@@ -6,4 +6,8 @@ return {
             auto_install = true,
         },
     },
+    {
+        'windwp/nvim-ts-autotag',
+        opts = {},
+    },
 }
