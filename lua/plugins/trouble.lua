@@ -15,28 +15,33 @@ return {
         keys = {
             {
                 'gd',
-                '<cmd>Trouble lsp_definitions<cr>',
+                '<cmd>Trouble lsp_definitions open_no_results=false warn_no_results=true<cr>',
                 desc = 'LSP Definitions (Trouble)',
+                nowait = true,
             },
             {
                 'gD',
-                '<cmd>Trouble lsp_declarations<cr>',
+                '<cmd>Trouble lsp_declarations open_no_results=false warn_no_results=true<cr>',
                 desc = 'LSP Declarations (Trouble)',
+                nowait = true,
             },
             {
                 'gi',
-                '<cmd>Trouble lsp_implementations<cr>',
+                '<cmd>Trouble lsp_implementations open_no_results=false warn_no_results=true<cr>',
                 desc = 'LSP Implementations (Trouble)',
+                nowait = true,
             },
             {
                 'gr',
-                '<cmd>Trouble lsp_references<cr>',
+                '<cmd>Trouble lsp_references<cr> open_no_results=false warn_no_results=true',
                 desc = 'LSP References (Trouble)',
+                nowait = true,
             },
             {
                 'gR',
-                '<cmd>Trouble lsp_references filter=local<cr>',
+                '<cmd>Trouble lsp_references filter=local open_no_results=false warn_no_results=true<cr>',
                 desc = 'Local LSP References (Trouble)',
+                nowait = true,
             },
             {
                 '<leader>q',
