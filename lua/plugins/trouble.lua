@@ -26,6 +26,12 @@ return {
                 nowait = true,
             },
             {
+                'gy',
+                '<cmd>Trouble lsp_type_definitions open_no_results=false warn_no_results=true<cr>',
+                desc = 'LSP Type Definitions (Trouble)',
+                nowait = true,
+            },
+            {
                 'gi',
                 '<cmd>Trouble lsp_implementations open_no_results=false warn_no_results=true<cr>',
                 desc = 'LSP Implementations (Trouble)',
