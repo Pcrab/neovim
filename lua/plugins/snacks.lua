@@ -22,7 +22,10 @@ return {
             {
                 '<leader>fe',
                 function()
-                    require('snacks').explorer()
+                    require('snacks').explorer {
+                        hidden = true,
+                        ignored = true,
+                    }
                 end,
                 desc = 'Snacks Explorer',
             },
