@@ -65,6 +65,11 @@ return {
                 desc = 'Buffer Diagnostics (Trouble)',
             },
             {
+                '<leader>xt',
+                '<cmd>Trouble todo toggle<cr>',
+                desc = 'TODO (Trouble)',
+            },
+            {
                 '<leader>cs',
                 '<cmd>Trouble symbols toggle focus=false<cr>',
                 desc = 'Symbols (Trouble)',
