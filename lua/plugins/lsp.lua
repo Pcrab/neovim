@@ -1,22 +1,26 @@
 return {
     {
         'neovim/nvim-lspconfig',
-        dependencies = { 'saghen/blink.cmp' },
-
-        -- example using `opts` for defining servers
-        opts = {
-            servers = {
+        dependencies = { 'saghen/blink.cmp', 'b0o/schemastore.nvim' },
+        config = function()
+            local servers = {
                 lua_ls = {},
                 fsautocomplete = {},
-                biome = {},
                 ts_ls = {},
                 koka = {},
                 metals = {},
-            },
-        },
-        config = function(_, opts)
+                jsonls = {
+                    settings = {
+                        json = {
+                            schemas = require('schemastore').json.schemas(),
+                            validate = { enable = true },
+                        },
+                    },
+                },
+                biome = {},
+            }
             local lspconfig = require 'lspconfig'
-            for server, config in pairs(opts.servers) do
+            for server, config in pairs(servers) do
                 config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
                 config.on_attach = function(args)
                     vim.lsp.codelens.clear()
