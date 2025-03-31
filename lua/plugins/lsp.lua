@@ -6,7 +6,71 @@ return {
             local servers = {
                 lua_ls = {},
                 fsautocomplete = {},
-                ts_ls = {},
+                vtsls = {
+                    settings = {
+                        vtsls = {
+                            autoUseWorkspaceTsdk = true,
+                        },
+                        javascript = {
+                            implementationsCodeLens = {
+                                enabled = true,
+                            },
+                            referencesCodeLens = {
+                                enabled = true,
+                                showOnAllFunctions = true,
+                            },
+                            inlayHints = {
+                                parameterNames = {
+                                    enabled = true,
+                                },
+                                parameterTypes = {
+                                    enabled = true,
+                                },
+                                variableTypes = {
+                                    enabled = true,
+                                },
+                                propertyDeclarationTypes = {
+                                    enabled = true,
+                                },
+                                functionLikeReturnTypes = {
+                                    enabled = true,
+                                },
+                                enumMemberValues = {
+                                    enabled = true,
+                                },
+                            },
+                        },
+                        typescript = {
+                            implementationsCodeLens = {
+                                enabled = true,
+                            },
+                            referencesCodeLens = {
+                                enabled = true,
+                                showOnAllFunctions = true,
+                            },
+                            inlayHints = {
+                                parameterNames = {
+                                    enabled = true,
+                                },
+                                parameterTypes = {
+                                    enabled = true,
+                                },
+                                variableTypes = {
+                                    enabled = true,
+                                },
+                                propertyDeclarationTypes = {
+                                    enabled = true,
+                                },
+                                functionLikeReturnTypes = {
+                                    enabled = true,
+                                },
+                                enumMemberValues = {
+                                    enabled = true,
+                                },
+                            },
+                        },
+                    },
+                },
                 koka = {},
                 metals = {},
                 jsonls = {
@@ -22,14 +86,10 @@ return {
             local lspconfig = require 'lspconfig'
             for server, config in pairs(servers) do
                 config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
-                config.on_attach = function(args)
+                config.on_attach = function()
                     vim.lsp.codelens.clear()
                     vim.lsp.codelens.refresh()
-                    if vim.lsp.buf.inlay_hint then
-                        vim.lsp.buf.inlay_hint(args.buf, true)
-                    elseif vim.lsp.inlay_hint then
-                        vim.lsp.inlay_hint.enable(true)
-                    end
+                    vim.lsp.inlay_hint.enable(true)
                 end
                 lspconfig[server].setup(config)
             end
