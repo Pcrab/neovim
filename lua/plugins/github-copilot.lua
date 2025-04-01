@@ -2,7 +2,19 @@ return {
     {
         'CopilotC-Nvim/CopilotChat.nvim',
         dependencies = {
-            { 'zbirenbaum/copilot.lua', cmd = 'Copilot', event = 'InsertEnter', opts = {} },
+            {
+                'zbirenbaum/copilot.lua',
+                cmd = 'Copilot',
+                event = 'InsertEnter',
+                opts = {
+                    auto_trigger = true,
+                    suggestion = {
+                        keymap = {
+                            accept = false,
+                        },
+                    },
+                },
+            },
             { 'nvim-lua/plenary.nvim' },
         },
         build = 'make tiktoken', -- Only on MacOS or Linux
