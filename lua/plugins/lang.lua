@@ -11,4 +11,10 @@ return {
             vim.opt.rtp:append(plugin.dir .. '/support/vim')
         end,
     },
+    'b0o/schemastore.nvim',
+    {
+        'mrcjkb/haskell-tools.nvim',
+        version = '^5',
+        lazy = false,
+    },
 }

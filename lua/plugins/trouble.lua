@@ -39,7 +39,7 @@ return {
             },
             {
                 'gr',
-                '<cmd>Trouble lsp_references<cr> open_no_results=false warn_no_results=true',
+                '<cmd>Trouble lsp_references open_no_results=false warn_no_results=true<cr>',
                 desc = 'LSP References (Trouble)',
                 nowait = true,
             },
