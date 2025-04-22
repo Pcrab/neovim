@@ -6,7 +6,10 @@ return {
         opts = {
             formatters_by_ft = {
                 lua = { 'stylua' },
+                haskell = { 'fourmolu' },
                 json = { 'biome' },
+                toml = { 'taplo' },
+                ocaml = { 'ocamlformat', 'ocp-indent' },
                 javascript = { 'biome' },
                 typescript = { 'biome' },
                 javascriptreact = { 'biome' },
