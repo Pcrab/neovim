@@ -24,4 +24,12 @@ vim.pack.add({
 	-- GIT
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
 	{ src = "https://github.com/tpope/vim-fugitive" },
+
+	-- blink.download prebuilt binaries from gh release
+	{ src = "https://github.com/saghen/blink.pairs", version = "v0.3.0" },
+	{ src = "https://github.com/saghen/blink.download" },
+
+	{ src = "https://github.com/saghen/blink.indent" },
+
+	{ src = "https://github.com/ibhagwan/fzf-lua" },
 })
