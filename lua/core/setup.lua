@@ -112,3 +112,5 @@ require("blink.indent").setup({
 		},
 	},
 })
+
+require("todo-comments").setup({})

@@ -32,4 +32,7 @@ vim.pack.add({
 	{ src = "https://github.com/saghen/blink.indent" },
 
 	{ src = "https://github.com/ibhagwan/fzf-lua" },
+
+	{ src = "https://github.com/folke/todo-comments.nvim" },
+	{ src = "https://github.com/nvim-lua/plenary.nvim" },
 })
