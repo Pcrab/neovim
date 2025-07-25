@@ -4,11 +4,6 @@ vim.pack.add({
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 
-	{
-		src = "https://github.com/Saghen/blink.cmp",
-		version = vim.version.range("1"),
-	},
-
 	{ src = "https://github.com/folke/lazydev.nvim" },
 
 	{ src = "https://github.com/RRethy/vim-illuminate" },
@@ -30,6 +25,11 @@ vim.pack.add({
 	{ src = "https://github.com/saghen/blink.download" },
 
 	{ src = "https://github.com/saghen/blink.indent" },
+
+	{
+		src = "https://github.com/Saghen/blink.cmp",
+		version = vim.version.range("1"),
+	},
 
 	{ src = "https://github.com/ibhagwan/fzf-lua" },
 
