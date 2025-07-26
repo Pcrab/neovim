@@ -1,0 +1,3 @@
+[submodule "/home/pcrab/.config/nvim/pack/plugins/start/mason.nvim"]
+	path = /home/pcrab/.config/nvim/pack/plugins/start/mason.nvim
+	url = https://github.com/mason-org/mason.nvim
