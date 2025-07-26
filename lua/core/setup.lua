@@ -130,4 +130,26 @@ vim.keymap.set("i", "<Tab>", function()
 		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
 	end
 end, { desc = "Super Tab" })
-require("codecompanion").setup({})
+require("codecompanion").setup({
+	strategies = {
+		chat = {
+			adapter = "copilot",
+		},
+		inline = {
+			adapter = "copilot",
+		},
+		cmd = {
+			adapter = "copilot",
+		},
+	},
+	opts = {},
+	adapters = {
+		deepseek = function()
+			return require("codecompanion.adapters").extend("anthropic", {
+				env = {
+					api_key = "cmd: gpg --batch --quiet --decrypt ~/.cache/secrets/deepseek.gpg",
+				},
+			})
+		end,
+	},
+})
