@@ -17,6 +17,9 @@ require("nvim-treesitter.configs").setup({
 	ignore_install = {},
 	auto_install = true,
 	modules = {},
+	highlight = {
+		enable = true,
+	},
 })
 
 require("leap").set_default_mappings()
