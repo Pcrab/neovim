@@ -3,8 +3,10 @@ require("lazydev").setup({})
 require("mason").setup({})
 require("mason-lspconfig").setup({
 	ensure_installed = {
-		"lua_ls",
+		"emmylua_ls",
 		"vimls",
+		"fennel_language_server",
+		"elixirls",
 	},
 })
 require("blink.cmp").setup({})
