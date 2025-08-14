@@ -7,6 +7,8 @@ require("mason-lspconfig").setup({
 		"vimls",
 		"fennel_language_server",
 		"elixirls",
+		"html",
+		"vtsls",
 	},
 })
 require("blink.cmp").setup({})
